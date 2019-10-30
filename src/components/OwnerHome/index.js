@@ -61,6 +61,16 @@ class SubmitNewCaseBase extends Component {
 
 
     }
+    onChangeDelete = () => {
+        var selectedFileArray = [...this.state.selectedFile];
+        var fileURLArray = [...this.state.fileURL];
+        selectedFileArray.splice(selectedFileArray.length - 1);
+        fileURLArray.splice(fileURLArray.length - 1);
+        this.setState({
+            selectedFile: [...selectedFileArray],
+            fileURL: [...fileURLArray]
+        });
+    }
     componentWillMount() {
         console.log(this.props.authUser);
     }
@@ -91,6 +101,7 @@ class SubmitNewCaseBase extends Component {
 
                 {result}
                 <input type="file" onChange={this.onChangeFileSelector}></input>
+                <button onClick={this.onChangeDelete}>Remove</button>
                 <button onClick={this.onChangeSubmit}>Submit</button>
 
 
