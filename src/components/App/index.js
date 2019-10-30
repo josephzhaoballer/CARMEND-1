@@ -29,7 +29,7 @@ const App = () => (
       <Route path={ROUTES.ACCOUNT} component={AccountPage} />
       <Route path={ROUTES.ADMIN} component={AdminPage} />
       <Route path={ROUTES.SHOP_HOME} component={ShopHome} />
-      <Route path={ROUTES.OWNER_HOME} component = {OwnerHome} />
+      <Route path={ROUTES.OWNER_HOME} component={OwnerHome} />
 
     </div>
   </Router>
@@ -37,3 +37,5 @@ const App = () => (
 
 
 export default withAuthentication(App);
+
+

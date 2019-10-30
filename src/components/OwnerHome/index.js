@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { withAuthentication } from '../Session';
-import {AuthUserContext} from '../Session';
+import { AuthUserContext } from '../Session';
 const axios = require('axios');
 
 
 const OwnerHome = () => (
     <AuthUserContext.Consumer>
-        {authUser =>(<SubmitNewCase authUser ={authUser} />)}
-        
+        {authUser => (<SubmitNewCase authUser={authUser} />)}
+
     </AuthUserContext.Consumer>
-    
+
 );
 class SubmitNewCaseBase extends Component {
     constructor(props) {
@@ -36,7 +36,7 @@ class SubmitNewCaseBase extends Component {
             });
         };
         reader.readAsDataURL(file);
-        
+
 
     }
     onChangeSubmit = () => {
@@ -61,17 +61,17 @@ class SubmitNewCaseBase extends Component {
 
 
     }
-    componentWillMount(){
+    componentWillMount() {
         console.log(this.props.authUser);
     }
     onChangeTextBox = (event) => {
         this.setState({ [event.target.name]: event.target.value });
     }
-    
+
 
     render() {
 
-        const  typeOfDamage  = this.state.typeOfDamage;
+        const typeOfDamage = this.state.typeOfDamage;
         var result = [];
         for (var i = 0; i < this.state.fileURL.length; i++) {
             console.log("here")
@@ -101,3 +101,4 @@ class SubmitNewCaseBase extends Component {
 }
 const SubmitNewCase = withAuthentication(SubmitNewCaseBase);
 export default OwnerHome;
+

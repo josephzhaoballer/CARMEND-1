@@ -17,11 +17,11 @@ const withAuthentication = Component => {
           authUser
             ? this.setState({ authUser })
             : this.setState({ authUser: null });
-            if(authUser){
-              console.log("logged in");
-            }else{
-              console.log("not logged in");
-            }
+          if (authUser) {
+            console.log("logged in");
+          } else {
+            console.log("not logged in");
+          }
         },
       );
     }
@@ -30,7 +30,7 @@ const withAuthentication = Component => {
     }
 
     render() {
-      console.log("authuser at provider"+this.state.authUser);
+      console.log("authuser at provider" + this.state.authUser);
       return (
         <AuthUserContext.Provider value={this.state.authUser}>
           <Component {...this.props} />
@@ -43,3 +43,4 @@ const withAuthentication = Component => {
 };
 
 export default withAuthentication;
+
