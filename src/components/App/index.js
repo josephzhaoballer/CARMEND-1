@@ -16,6 +16,9 @@ import * as ROUTES from "../../constants/routes";
 import { withAuthentication } from "../Session";
 
 const App = () => (
+
+
+
   <Router>
     <div>
       <Route exact path={ROUTES.LANDING} component={LandingPage} />
@@ -26,10 +29,11 @@ const App = () => (
       <Route path={ROUTES.ACCOUNT} component={AccountPage} />
       <Route path={ROUTES.ADMIN} component={AdminPage} />
       <Route path={ROUTES.SHOP_HOME} component={ShopHome} />
-      <Route path={ROUTES.OWNER_HOME} component={OwnerHome} />
+      <Route path={ROUTES.OWNER_HOME} component = {OwnerHome} />
 
     </div>
   </Router>
 );
+
 
 export default withAuthentication(App);

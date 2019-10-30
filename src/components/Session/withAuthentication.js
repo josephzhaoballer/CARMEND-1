@@ -7,30 +7,30 @@ const withAuthentication = Component => {
   class WithAuthentication extends React.Component {
     constructor(props) {
       super(props);
-
       this.state = {
-        authUser: JSON.parse(localStorage.getItem('authUser')),
+        authUser: null,
       };
     }
-
     componentDidMount() {
-      this.listener = this.props.firebase.onAuthUserListener(
+      this.listener = this.props.firebase.auth.onAuthStateChanged(
         authUser => {
-          localStorage.setItem('authUser', JSON.stringify(authUser));
-          this.setState({ authUser });
-        },
-        () => {
-          localStorage.removeItem('authUser');
-          this.setState({ authUser: null });
+          authUser
+            ? this.setState({ authUser })
+            : this.setState({ authUser: null });
+            if(authUser){
+              console.log("logged in");
+            }else{
+              console.log("not logged in");
+            }
         },
       );
     }
-
     componentWillUnmount() {
       this.listener();
     }
 
     render() {
+      console.log("authuser at provider"+this.state.authUser);
       return (
         <AuthUserContext.Provider value={this.state.authUser}>
           <Component {...this.props} />
