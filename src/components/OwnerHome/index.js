@@ -61,6 +61,7 @@ class SubmitNewCaseBase extends Component {
 
 
     }
+    //remove order: LIFO
     onChangeDelete = () => {
         var selectedFileArray = [...this.state.selectedFile];
         var fileURLArray = [...this.state.fileURL];
@@ -102,6 +103,7 @@ class SubmitNewCaseBase extends Component {
                 {result}
                 <input type="file" onChange={this.onChangeFileSelector}></input>
                 <button onClick={this.onChangeDelete}>Remove</button>
+                
                 <button onClick={this.onChangeSubmit}>Submit</button>
 
 
