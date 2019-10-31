@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import { compose } from 'recompose';
-import './SignUpStyle.css';
-import mainLogo from '../../assets/logo.png';
+import React, { Component } from "react";
+import { Link, withRouter } from "react-router-dom";
+import { compose } from "recompose";
+import "./SignUpStyle.css";
+import mainLogo from "../../assets/logo.png";
 
-import { withFirebase } from '../Firebase';
-import * as ROUTES from '../../constants/routes';
-import * as ROLES from '../../constants/roles';
+import { withFirebase } from "../Firebase";
+import * as ROUTES from "../../constants/routes";
+import * as ROLES from "../../constants/roles";
 
 const SignUpPage = () => (
   <section class="signup-section">
@@ -20,15 +20,15 @@ const SignUpPage = () => (
 );
 
 const INITIAL_STATE = {
-  username: '',
-  email: '',
-  passwordOne: '',
-  passwordTwo: '',
-  role: '',
-  error: null,
+  username: "",
+  email: "",
+  passwordOne: "",
+  passwordTwo: "",
+  role: "",
+  error: null
 };
 
-const ERROR_CODE_ACCOUNT_EXISTS = 'auth/email-already-in-use';
+const ERROR_CODE_ACCOUNT_EXISTS = "auth/email-already-in-use";
 
 const ERROR_MSG_ACCOUNT_EXISTS = `
   An account with this E-Mail address already exists.
@@ -48,7 +48,6 @@ class SignUpFormBase extends Component {
   onSubmit = event => {
     const { username, email, passwordOne, role } = this.state;
 
-
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
@@ -56,28 +55,26 @@ class SignUpFormBase extends Component {
         return this.props.firebase.user(authUser.user.uid).set({
           username,
           email,
-          role,
+          role
         });
       })
       .then(() => {
         console.log(role);
-        if(role === ROLES.OWNER){
-          return this.props.firebase.doSendEmailVerification(ROUTES.OWNER_HOME);// after email verification page will direct to "/home-owner"
+        if (role === ROLES.OWNER) {
+          return this.props.firebase.doSendEmailVerification(ROUTES.OWNER_HOME); // after email verification page will direct to "/home-owner"
         }
-        if(role === ROLES.SHOP){
-          return this.props.firebase.doSendEmailVerification(ROUTES.SHOP_HOME);// after email verification page will direct to "/home-shop"
+        if (role === ROLES.SHOP) {
+          return this.props.firebase.doSendEmailVerification(ROUTES.SHOP_HOME); // after email verification page will direct to "/home-shop"
         }
-        
       })
       .then(() => {
         //this.setState({ ...INITIAL_STATE });
-        if(role === ROLES.OWNER){
+        if (role === ROLES.OWNER) {
           this.props.history.push(ROUTES.OWNER_HOME);
-        }
-        else if(role === ROLES.SHOP){
+        } else if (role === ROLES.SHOP) {
           this.props.history.push(ROUTES.SHOP_HOME);
-        }
-        else{// for now no way to reach here 
+        } else {
+          // for now no way to reach here
           console.log("redirected to /home");
           this.props.history.push(ROUTES.HOME);
         }
@@ -108,14 +105,14 @@ class SignUpFormBase extends Component {
       passwordOne,
       passwordTwo,
       role,
-      error,
+      error
     } = this.state;
 
     const isInvalid =
       passwordOne !== passwordTwo ||
-      passwordOne === '' ||
-      email === '' ||
-      username === '';
+      passwordOne === "" ||
+      email === "" ||
+      username === "";
 
     return (
       <div class="overall-text">
@@ -171,33 +168,32 @@ class SignUpFormBase extends Component {
               />
             </label>
             <br />*/}
-            
-            <label class="signup-shop-label">
-              Body Shop:
-              <input
-                name="role"
-                type="radio"
-                value = {ROLES.SHOP}
-                checked = {role === ROLES.SHOP}
-                onChange={this.onChangeRadioButton}
-              />
-            </label>
-            <label class="signup-owner-label">
-              Vehicle Owner:
-              <input
-                name="role"
-                type="radio"
-                value = {ROLES.OWNER}
-                checked={role === ROLES.OWNER}
-                onChange={this.onChangeRadioButton}
-              />
-            </label>
+            <div class="signup-checkbox1-label">
+              <label>
+                Body Shop
+                <input
+                  name="role"
+                  type="radio"
+                  value={ROLES.SHOP}
+                  checked={role === ROLES.SHOP}
+                  onChange={this.onChangeRadioButton}
+                />
+              </label>
+            </div>
+            <div class="signup-checkbox2-label">
+              <label>
+                Vehicle Owner
+                <input
+                  name="role"
+                  type="radio"
+                  value={ROLES.OWNER}
+                  checked={role === ROLES.OWNER}
+                  onChange={this.onChangeRadioButton}
+                />
+              </label>
+            </div>
             <div class="signup-button-spacing">
-              <button
-                class="signup-button"
-                disabled={isInvalid}
-                type="submit"
-              >
+              <button class="signup-button" disabled={isInvalid} type="submit">
                 Sign Up
               </button>
               <p>
@@ -231,7 +227,7 @@ const SignUpButton = () => (
 
 const SignUpForm = compose(
   withRouter,
-  withFirebase,
+  withFirebase
 )(SignUpFormBase);
 
 export default SignUpPage;
