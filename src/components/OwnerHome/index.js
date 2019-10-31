@@ -6,6 +6,8 @@ import {
   withEmailVerification
 } from "../Session";
 import { withFirebase } from "../Firebase";
+
+import ImageUpload from "../ImageUpload/ImageUpload.js";
 const axios = require("axios");
 
 const OwnerHome = () => (
@@ -83,6 +85,10 @@ class SubmitNewCaseBase extends Component {
   onChangeTextBox = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
+
+  /*********************************** */
+
+  /*********************************** */
 
   render() {
     const typeOfDamage = this.state.typeOfDamage;
