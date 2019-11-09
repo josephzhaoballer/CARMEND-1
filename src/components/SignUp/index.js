@@ -56,28 +56,28 @@ class SignUpFormBase extends Component {
         return this.props.firebase.user(authUser.user.uid).set({
           username,
           email,
-          role,
+          role
         });
       })
       .then(() => {
         console.log(role);
-        if(role === ROLES.OWNER){
+        if (role === ROLES.OWNER) {
           return this.props.firebase.doSendEmailVerification(ROUTES.OWNER_HOME);// after email verification page will direct to "/home-owner"
         }
-        if(role === ROLES.SHOP){
+        if (role === ROLES.SHOP) {
           return this.props.firebase.doSendEmailVerification(ROUTES.SHOP_HOME);// after email verification page will direct to "/home-shop"
         }
-        
+
       })
       .then(() => {
         //this.setState({ ...INITIAL_STATE });
-        if(role === ROLES.OWNER){
+        if (role === ROLES.OWNER) {
           this.props.history.push(ROUTES.OWNER_HOME);
         }
-        else if(role === ROLES.SHOP){
+        else if (role === ROLES.SHOP) {
           this.props.history.push(ROUTES.SHOP_HOME);
         }
-        else{// for now no way to reach here 
+        else {// for now no way to reach here 
           console.log("redirected to /home");
           this.props.history.push(ROUTES.HOME);
         }
@@ -171,14 +171,14 @@ class SignUpFormBase extends Component {
               />
             </label>
             <br />*/}
-            
+
             <label class="signup-shop-label">
               Body Shop:
               <input
                 name="role"
                 type="radio"
-                value = {ROLES.SHOP}
-                checked = {role === ROLES.SHOP}
+                value={ROLES.SHOP}
+                checked={role === ROLES.SHOP}
                 onChange={this.onChangeRadioButton}
               />
             </label>
@@ -187,7 +187,7 @@ class SignUpFormBase extends Component {
               <input
                 name="role"
                 type="radio"
-                value = {ROLES.OWNER}
+                value={ROLES.OWNER}
                 checked={role === ROLES.OWNER}
                 onChange={this.onChangeRadioButton}
               />

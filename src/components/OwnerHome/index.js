@@ -41,6 +41,11 @@ class SubmitNewCaseBase extends Component {
     }
     onChangeSubmit = () => {
         const typeOfDamage = this.state.typeOfDamage;
+        var caseFolderRef = this.props.firebase.user(this.props.authUser.uid).child("cases/");
+        var caseRef = caseFolderRef.push({
+            description: typeOfDamage,
+            status:"created"
+        });
         for (var i = 0; i < this.state.selectedFile.length; i++) {
             const fd = new FormData();
             fd.append('image', this.state.selectedFile[i], this.state.selectedFile[i].name);
@@ -49,10 +54,7 @@ class SubmitNewCaseBase extends Component {
                 .then(res => {
                     console.log(res);
                     console.log(res.data.url);
-                    this.props.firebase.user(this.props.authUser.uid).update({
-                        typeOfDamage,
-                        url: res.data.url
-                    });
+                    caseRef.child("urls/").push({url: res.data.url});
                 })
                 .catch(error => {
                     console.log(error);
