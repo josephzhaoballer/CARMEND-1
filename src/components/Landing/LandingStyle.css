@@ -15,6 +15,14 @@
   width: 450px;
 }
 
+.description {
+  color: #dbd5bb;
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 0.5em;
+
+}
+
 .landing-text {
   color: #dbd5bb;
   font-weight: bold;

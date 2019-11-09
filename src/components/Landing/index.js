@@ -12,6 +12,10 @@ const Landing = () => (
         <img src={mainLogo} class="landing-logo-att" />
       </div>
 
+    <div class = "description"> Carmend is the latest car repair shop application that bridges the gap between vehicle users and body shop owners. </div>
+
+    <div class = "description"> Skip the repair shop line and get an instant quote today.  </div>
+
       <div class="landing-text">
         PLEASE LOGIN OR SIGNUP TO GET A
         <br />
