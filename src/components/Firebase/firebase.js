@@ -1,14 +1,14 @@
-import app from "firebase/app";
-import "firebase/auth";
-import "firebase/database";
+import app from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/database';
 
 const config = {
-  apiKey: "AIzaSyA7qz-qow-zExdOo2II7-lazsc_OQIe6Cw",
-  authDomain: "carmend-52299.firebaseapp.com",
-  databaseURL: "https://carmend-52299.firebaseio.com",
-  projectId: "carmend-52299",
-  storageBucket: "carmend-52299.appspot.com",
-  messagingSenderId: "124689718739"
+  apiKey: 'AIzaSyA7qz-qow-zExdOo2II7-lazsc_OQIe6Cw',
+  authDomain: 'carmend-52299.firebaseapp.com',
+  databaseURL: 'https://carmend-52299.firebaseio.com',
+  projectId: 'carmend-52299',
+  storageBucket: 'carmend-52299.appspot.com',
+  messagingSenderId: '124689718739',
 };
 
 class Firebase {
@@ -40,22 +40,26 @@ class Firebase {
   doSignInWithEmailAndPassword = (email, password) =>
     this.auth.signInWithEmailAndPassword(email, password);
 
-  doSignInWithGoogle = () => this.auth.signInWithPopup(this.googleProvider);
+  doSignInWithGoogle = () =>
+    this.auth.signInWithPopup(this.googleProvider);
 
-  doSignInWithFacebook = () => this.auth.signInWithPopup(this.facebookProvider);
+  doSignInWithFacebook = () =>
+    this.auth.signInWithPopup(this.facebookProvider);
 
-  doSignInWithTwitter = () => this.auth.signInWithPopup(this.twitterProvider);
+  doSignInWithTwitter = () =>
+    this.auth.signInWithPopup(this.twitterProvider);
 
   doSignOut = () => this.auth.signOut();
 
   doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
 
-  doSendEmailVerification = subUrl =>
+  doSendEmailVerification = () =>
     this.auth.currentUser.sendEmailVerification({
-      url: `http://localhost:3000${subUrl}`
+      url: 'http://localhost:3000/home',
     });
 
-  doPasswordUpdate = password => this.auth.currentUser.updatePassword(password);
+  doPasswordUpdate = password =>
+    this.auth.currentUser.updatePassword(password);
 
   // *** Merge Auth and DB User API *** //
 
@@ -63,7 +67,7 @@ class Firebase {
     this.auth.onAuthStateChanged(authUser => {
       if (authUser) {
         this.user(authUser.uid)
-          .once("value")
+          .once('value')
           .then(snapshot => {
             const dbUser = snapshot.val();
 
@@ -78,7 +82,7 @@ class Firebase {
               email: authUser.email,
               emailVerified: authUser.emailVerified,
               providerData: authUser.providerData,
-              ...dbUser
+              ...dbUser,
             };
 
             next(authUser);
@@ -92,13 +96,13 @@ class Firebase {
 
   user = uid => this.db.ref(`users/${uid}`);
 
-  users = () => this.db.ref("users");
+  users = () => this.db.ref('users');
 
   // *** Message API ***
 
   message = uid => this.db.ref(`messages/${uid}`);
 
-  messages = () => this.db.ref("messages");
+  messages = () => this.db.ref('messages');
 }
 
 export default Firebase;

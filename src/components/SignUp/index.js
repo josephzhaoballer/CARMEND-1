@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
-import { compose } from "recompose";
-import "./SignUpStyle.css";
-import mainLogo from "../../assets/logo.png";
+import React, { Component } from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import { compose } from 'recompose';
+import './SignupStyle.css';
+import mainLogo from '../../assets/logo.png';
 
-import { withFirebase } from "../Firebase";
-import * as ROUTES from "../../constants/routes";
-import * as ROLES from "../../constants/roles";
+import { withFirebase } from '../Firebase';
+import * as ROUTES from '../../constants/routes';
+import * as ROLES from '../../constants/roles';
 
 const SignUpPage = () => (
   <section class="signup-section">
@@ -20,15 +20,15 @@ const SignUpPage = () => (
 );
 
 const INITIAL_STATE = {
-  username: "",
-  email: "",
-  passwordOne: "",
-  passwordTwo: "",
-  role: "",
-  error: null
+  username: '',
+  email: '',
+  passwordOne: '',
+  passwordTwo: '',
+  isAdmin: false,
+  error: null,
 };
 
-const ERROR_CODE_ACCOUNT_EXISTS = "auth/email-already-in-use";
+const ERROR_CODE_ACCOUNT_EXISTS = 'auth/email-already-in-use';
 
 const ERROR_MSG_ACCOUNT_EXISTS = `
   An account with this E-Mail address already exists.
@@ -46,7 +46,12 @@ class SignUpFormBase extends Component {
   }
 
   onSubmit = event => {
-    const { username, email, passwordOne, role } = this.state;
+    const { username, email, passwordOne, isAdmin } = this.state;
+    const roles = {};
+
+    if (isAdmin) {
+      roles[ROLES.ADMIN] = ROLES.ADMIN;
+    }
 
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
@@ -55,31 +60,15 @@ class SignUpFormBase extends Component {
         return this.props.firebase.user(authUser.user.uid).set({
           username,
           email,
-          role
+          roles,
         });
       })
       .then(() => {
-        console.log(role);
-        if (role === ROLES.OWNER) {
-          return this.props.firebase.doSendEmailVerification(ROUTES.OWNER_HOME);// after email verification page will direct to "/home-owner"
-        }
-        if (role === ROLES.SHOP) {
-          return this.props.firebase.doSendEmailVerification(ROUTES.SHOP_HOME);// after email verification page will direct to "/home-shop"
-        }
-
+        return this.props.firebase.doSendEmailVerification();
       })
       .then(() => {
-        //this.setState({ ...INITIAL_STATE });
-        if (role === ROLES.OWNER) {
-          this.props.history.push(ROUTES.OWNER_HOME);
-        }
-        else if (role === ROLES.SHOP) {
-          this.props.history.push(ROUTES.SHOP_HOME);
-        }
-        else {// for now no way to reach here 
-          console.log("redirected to /home");
-          this.props.history.push(ROUTES.HOME);
-        }
+        this.setState({ ...INITIAL_STATE });
+        this.props.history.push(ROUTES.HOME);
       })
       .catch(error => {
         if (error.code === ERROR_CODE_ACCOUNT_EXISTS) {
@@ -96,8 +85,8 @@ class SignUpFormBase extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  onChangeRadioButton = event => {
-    this.setState({ [event.target.name]: event.target.value });
+  onChangeCheckbox = event => {
+    this.setState({ [event.target.name]: event.target.checked });
   };
 
   render() {
@@ -106,15 +95,15 @@ class SignUpFormBase extends Component {
       email,
       passwordOne,
       passwordTwo,
-      role,
-      error
+      isAdmin,
+      error,
     } = this.state;
 
     const isInvalid =
       passwordOne !== passwordTwo ||
-      passwordOne === "" ||
-      email === "" ||
-      username === "";
+      passwordOne === '' ||
+      email === '' ||
+      username === '';
 
     return (
       <div class="overall-text">
@@ -165,37 +154,17 @@ class SignUpFormBase extends Component {
               <input
                 name="isAdmin"
                 type="checkbox"
-                checked={role }
+                checked={isAdmin}
                 onChange={this.onChangeCheckbox}
               />
             </label>
             <br />*/}
-            <div class="signup-checkbox1-label">
-              <label>
-                Body Shop
-                <input
-                  name="role"
-                  type="radio"
-                  value={ROLES.SHOP}
-                  checked={role === ROLES.SHOP}
-                  onChange={this.onChangeRadioButton}
-                />
-              </label>
-            </div>
-            <div class="signup-checkbox2-label">
-              <label>
-                Vehicle Owner
-                <input
-                  name="role"
-                  type="radio"
-                  value={ROLES.OWNER}
-                  checked={role === ROLES.OWNER}
-                  onChange={this.onChangeRadioButton}
-                />
-              </label>
-            </div>
             <div class="signup-button-spacing">
-              <button class="signup-button" disabled={isInvalid} type="submit">
+              <button
+                class="signup-button"
+                disabled={isInvalid}
+                type="submit"
+              >
                 Sign Up
               </button>
               <p>
@@ -229,7 +198,7 @@ const SignUpButton = () => (
 
 const SignUpForm = compose(
   withRouter,
-  withFirebase
+  withFirebase,
 )(SignUpFormBase);
 
 export default SignUpPage;

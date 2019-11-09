@@ -9,14 +9,21 @@ import mainLogo from '../../assets/logo.png';
 
 const HomePage = () => (
   
+  
   <section class = "main-section">
+  <div>
+  <div class= "split-horizontal-border"> </div>
+
+  <div class = "main-text" >Home </div> 
+  <div class= "verticalLine"> </div> 
+  
+  <div class= "split-horizontal-border"> </div>
+
   <div class="landing-logo-position">
   <img src = {mainLogo} class="landing-logo-att" />
 
   </div>
 
-  <div>
-  <div class = "main-text" >Home Page</div>
   <p>The Home Page is accessible by every signed in user.</p>
   <SignOutButton />
 </div>

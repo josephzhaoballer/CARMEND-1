@@ -7,25 +7,25 @@ import * as ROUTES from '../../constants/routes';
 import mainLogo from '../../assets/logo.png';
 
 const PasswordForgetPage = () => (
+  <section class = "main-section">
   <div>
-  <div class = "main-section">
+  <div class = "split-horizontal-border"> </div>
+   
+   <div class = "main-text" >Forgot Your Password?</div>
+   <div class = "split-horizontal-border"> </div>
+    
+   <center><p> No worries. It happens to all of us. </p></center>
+   <center><p> Please enter your email and we'll send you a link to reset your password.</p></center>
 
-  <div class="landing-logo-position">
-    <img src = {mainLogo} class="landing-logo-att" /> </div>
-  
-    
+   
 
-    <div class = "main-text" >Forgot Your Password?</div>
-    
-    <center><p> No worries. It happens to all of us. </p></center>
-    <center><p> Please enter your email and we'll send you a link to reset your password.</p></center>
-    <center><PasswordForgetForm /></center>
+   <div class="landing-logo-position">
+  <img src = {mainLogo} class="landing-logo-att" />
 
-    
-    
   </div>
+   <center><PasswordForgetForm /></center>
   </div>
-
+  </section>
 );
 
 const INITIAL_STATE = {

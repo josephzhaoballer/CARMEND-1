@@ -1,0 +1,413 @@
+/** color palette
+ DARK BLUE: #00709A
+ MAIN BLUE: #63BFE1
+ DARK GRAY: #47525E
+ MAIN GRAY: #9FAAB0
+LIGHT GRAY: #ECF0F2
+**/
+
+/** basics start **/
+* {
+	margin:0;
+	padding:0;
+	box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-webkit-font-smoothing:antialiased;
+	-moz-font-smoothing:antialiased;
+	-o-font-smoothing:antialiased;
+	font-smoothing:antialiased;
+	text-rendering:optimizeLegibility;
+}
+body {
+    background-color: #ECF0F2!important;
+    margin: 0!important;
+}
+h1, h2, h3, h4, h5, h6 { 
+    font-family: 'Roboto', sans-serif!important;
+    color: #47525E!important;
+}
+p {
+    font-family: 'Roboto', sans-serif!important;
+    color: #9FAAB0!important;
+    letter-spacing: 0.50px!important;
+}
+a {
+    -o-transition: 0.4s ease-in-out;
+	-ms-transition: 0.4s ease-in-out;
+	-moz-transition: 0.4s ease-in-out;
+    transition: 0.4s ease-in-out;
+}
+/** basics end **/
+
+/** navigation start **/
+.navbar {
+    background-color: #63BFE1!important;
+    font-family: 'Roboto', sans-serif;
+    text-transform: uppercase;
+    font-size: 1.25em;
+}
+.navbar-nav {
+    text-align: center;
+}
+nav a {
+    color: white;
+}
+nav a:hover {
+    color: #00709A;
+}
+.custom-toggler.navbar-toggler {
+    border-color: rgb(255,255,255);
+}
+.custom-toggler .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+.form-inline ::placeholder {
+    font-family: 'Roboto', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.75px;
+    color: #9FAAB0!important;
+}
+.form-inline input[type=text] {
+    font-family: 'Roboto', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.75px;
+    color: #47525E;
+}
+/** navigation end **/
+
+/** index page start **/
+.homePage {
+    text-align: center;
+    width: 100%;
+}
+.homePage h1 {
+    font-size: 50px;
+    color: #63BFE1;
+    margin-top: 50px; 
+}
+.homePage p {
+    margin: 0 5%;
+}
+.homePageButtons {
+    width: 50%;
+    margin: 20px auto;
+}
+.homePageButtons button {
+    width: 48%; 
+    margin: 0 1%;; 
+    display: inline-block;
+    border: none;
+    background-color: #63BFE1;
+    color: #FFF;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px; 
+    text-transform: uppercase;
+    padding: 10px;
+}
+.homePageButtons button:hover {
+    background-color:#00709A;
+	-webkit-transition:background 0.3s ease-in-out;
+	-moz-transition:background 0.3s ease-in-out;
+	transition:background-color 0.3s ease-in-out;
+}
+p.description {
+    margin-top: 10px;
+    color: #47525E;
+}
+/** index page end **/
+
+/** about page start **/
+.aboutPage {
+    text-align: center;
+    margin-top: 30px;
+}
+.aboutPage h1 {
+    text-transform: uppercase;
+}
+.aboutPage p {
+    color: #47525E!important;
+}
+.aboutPage h2 {
+    text-transform: uppercase;
+    font-size: 30px;
+    font-weight: 500;
+}
+.bio {
+    width: 90%;
+}
+.bioImage {
+    width: 40%;
+}
+.bioDescription {
+    width: 60%;
+}
+/** about page end **/
+
+/** companies page start **/
+.companySponsors {
+    text-align: center;
+    margin-top: 30px;
+}
+.companySponsors h1 {
+    text-transform: uppercase;
+}
+.companySponsors p {
+    color: #47525E!important;
+}
+p.card-text {
+    font-family: 'Roboto', sans-serif!important;
+    color: #47525E!important;
+    text-align: center;
+}
+.companySponsorsButton {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.companySponsorsButton button {
+    width: 375px; 
+    margin: 0 1%; 
+    display: inline-block;
+    border: none;
+    background-color: #63BFE1;
+    color: #FFF;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px; 
+    text-transform: uppercase;
+    padding: 10px;
+}
+.companySponsorsButton button:hover {
+    background-color:#00709A;
+	-webkit-transition:background 0.3s ease-in-out;
+	-moz-transition:background 0.3s ease-in-out;
+	transition:background-color 0.3s ease-in-out;
+}
+p.companyDescription {
+    text-align: center;
+}
+/** companies page end **/
+
+/** contact page start **/
+.contactPage {
+    text-align: center;
+    margin-top: 30px;
+}
+.contactPage h1 {
+    text-transform: uppercase;
+}
+.contactPage p {
+    color: #47525E!important;
+}
+.contactPageSection {
+    text-align: center;
+    background-color: white;
+    width: 1000px;
+    margin: 0% auto;
+}
+/** contact page end **/
+
+/** register page start **/
+.registerPage {
+    text-align: center;
+    background-color: #fff;
+    width: 1000px;
+    margin: 5% auto;
+}
+.registerPage h2 {
+    font-size: 30px; 
+    font-weight: 800;
+    text-transform: uppercase;
+    padding-top: 5%;
+    margin-bottom: 10px;
+}
+.registerPage a {
+    color: #63BFE1;
+    text-decoration: none;
+    -o-transition: 0.4s ease-in-out;
+	-ms-transition: 0.4s ease-in-out;
+	-moz-transition: 0.4s ease-in-out;
+    transition: 0.4s ease-in-out;
+}
+.registerPage a:hover {
+    color: #00709A;
+    text-decoration: none;
+}
+.registerPage p {
+    margin: 0 5%;
+}
+p.terms {
+    padding-bottom:5%;
+}
+/** register page end **/
+
+/** login page start **/
+.loginPage {
+    text-align: center;
+    background-color: #fff;
+    width: 1000px;
+    margin: 5% auto;
+}
+.loginPage h2 {
+    font-size: 30px; 
+    font-weight: 800;
+    text-transform: uppercase;
+    padding-top: 5%;
+    margin-bottom: 10px;
+}
+.loginPage a {
+    color: #63BFE1;
+    text-decoration: none;
+    -o-transition: 0.4s ease-in-out;
+	-ms-transition: 0.4s ease-in-out;
+	-moz-transition: 0.4s ease-in-out;
+    transition: 0.4s ease-in-out;
+}
+.loginPage a:hover {
+    color: #00709A;
+    text-decoration: none;
+}
+.loginPage p {
+    margin: 0 5%;
+}
+p.help {
+    padding-bottom:5%;
+}
+/** login page end **/
+
+/** form start **/
+.mentorCrowdForm .formContainer {
+    display: block;
+	width: 75%;
+	margin: 0 auto;
+	position: relative;
+    text-align: left;
+}
+.mentorCrowdForm #form {
+	display: inline-block;
+	padding: 25px;
+    width:100%;
+}
+.mentorCrowdForm fieldset {
+	border: medium none !important;
+	margin: 0 0 15px;
+	padding: 0;
+}
+.mentorCrowdForm #form textarea, #form input[type="text"] {
+	width: 100%;
+	border: 1px solid #9FAAB0;
+	background: #FFF;
+	margin: 0 0 5px;
+	padding: 10px;
+    color: #9FAAB0;
+}
+.mentorCrowdForm #form textarea:hover, #form input[type="text"]:hover 
+{
+    border:1px solid #47525E;
+	-webkit-transition:border-color 0.3s ease-in-out;
+	-moz-transition:border-color 0.3s ease-in-out;
+	transition:border-color 0.3s ease-in-out;
+}
+.mentorCrowdForm #form button[type="submit"] {
+	width:100%;
+	background-color:#63BFE1;
+	color:#FFF;
+    border:none;
+	padding:10px;
+	font-size:20px;
+    font-family: 'Roboto', sans-serif;
+    text-transform: uppercase;
+}
+.mentorCrowdForm #form button[type="submit"]:hover {
+	background-color:#00709A;
+	-webkit-transition:background 0.3s ease-in-out;
+	-moz-transition:background 0.3s ease-in-out;
+	transition:background-color 0.3s ease-in-out;
+}
+/** form end **/
+
+/** home page start **/
+.homePage2 {
+    background-color: #fff;
+    width: 50%;
+    margin: 0 auto;
+}
+/** home page end **/
+
+/** network page start **/
+/** network page end **/
+
+/** message page start **/
+/** message page end **/
+
+/** profile page start **/
+.profilePage {
+    background-color: #fff;
+    width: 50%;
+    margin: 0 auto;
+}
+.profilePage h3 {
+    font-size: 25px;
+    letter-spacing: 1px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    
+}
+.profilePage h4 {
+    font-size: 18px;
+    letter-spacing: 0.5px;
+    font-weight: 200;
+   padding-bottom: 3px;
+}
+.profilePage h5 {
+    font-size: 20px;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 10px 4% 5px 4%;
+}
+.profilePage h6 {
+    font-size: 18px;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+    padding: 5px 4% 0 4%;
+}
+.basicInfo {
+    display:inline-block;
+    width: 100%;
+    padding: 5% 2%;
+    margin: 0 auto;
+}
+.basicInfo-image {
+    display: inline-block;
+    width: 31%;
+    float: left;
+    margin: 0 2%;
+}
+.basicInfo-image img {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+}
+.basicInfo-text {
+    display: inline-block;
+    width:61%;
+    float:left;
+    margin: 0 2%;
+}
+.profileAttributes p {
+    padding: 0 4% 3px 4%;
+}
+.education {
+    padding-bottom: 10px;
+}
+
+.experience {
+    padding-bottom: 10px;
+}
+.skills {
+    padding-bottom: 10px;
+}
+.certifiates {
+    padding-bottom: 10px;
+}
+/** profile page end **/

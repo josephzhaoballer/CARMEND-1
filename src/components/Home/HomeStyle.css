@@ -6,8 +6,8 @@
 }
 
 .main-logo-position {
-  padding-top: 100px;
-  text-align: center;
+  padding-top: 50px;
+  text-align: left;
 }
 
 .main-logo-att {
@@ -18,7 +18,6 @@
 .main-text {
   color: #dbd5bb;
   font-weight: bold;
-  font-style: italic;
   text-align: center;
   font-size: 30px;
 }
@@ -30,6 +29,10 @@
   width: 400px;
   height: 2px;
   border-radius: 30px;
+}
+
+.verticalLine {
+  border-left: thick solid #ff9d8d;
 }
 .split-horizontal-border
 {
