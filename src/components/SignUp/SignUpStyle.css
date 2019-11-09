@@ -28,13 +28,13 @@
 }
 
 .signup-logo-position {
-  padding-top: 25px;
+  padding-top: 30px;
   text-align: center;
 }
 
 .signup-logo-att {
-  height: 250px;
-  width: 450px;
+  height: 220px;
+  width: 400px;
 }
 
 .overall-text {
@@ -57,9 +57,8 @@
 }
 .signup-h1-style {
   color: #ff9d8d;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial,
-    sans-serif;
-  font-size: 45px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 30px;
   transform: scale(1, 0.95);
   display: inline;
   border-top: 3px solid #ff9d8d;
@@ -127,7 +126,7 @@
 .signup-textarea::placeholder {
   color: gray;
   font-weight: 500;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .signup-button-spacing {
@@ -141,7 +140,7 @@
   border: 0.1em solid #ff9d8d;
   margin: 0 0.3em 0.3em 0;
   border-radius: 7px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: bold;
   font-size: 25px;
   color: #ff9d8d;
@@ -160,8 +159,14 @@
   font-size: 20px;
 }
 
-.signup-admin-label {
-  text-align: center;
+.signup-checkbox1-label {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.signup-checkbox2-label {
+  margin-bottom: -20px;
+  margin-left: -25px;
 }
 
 .error-size {
