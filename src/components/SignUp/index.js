@@ -61,20 +61,22 @@ class SignUpFormBase extends Component {
       .then(() => {
         console.log(role);
         if (role === ROLES.OWNER) {
-          return this.props.firebase.doSendEmailVerification(ROUTES.OWNER_HOME); // after email verification page will direct to "/home-owner"
+          return this.props.firebase.doSendEmailVerification(ROUTES.OWNER_HOME);// after email verification page will direct to "/home-owner"
         }
         if (role === ROLES.SHOP) {
-          return this.props.firebase.doSendEmailVerification(ROUTES.SHOP_HOME); // after email verification page will direct to "/home-shop"
+          return this.props.firebase.doSendEmailVerification(ROUTES.SHOP_HOME);// after email verification page will direct to "/home-shop"
         }
+
       })
       .then(() => {
         //this.setState({ ...INITIAL_STATE });
         if (role === ROLES.OWNER) {
           this.props.history.push(ROUTES.OWNER_HOME);
-        } else if (role === ROLES.SHOP) {
+        }
+        else if (role === ROLES.SHOP) {
           this.props.history.push(ROUTES.SHOP_HOME);
-        } else {
-          // for now no way to reach here
+        }
+        else {// for now no way to reach here 
           console.log("redirected to /home");
           this.props.history.push(ROUTES.HOME);
         }

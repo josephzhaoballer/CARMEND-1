@@ -29,42 +29,56 @@ class SubmitNewCaseBase extends Component {
     if (!event.target.files[0]) {
       return;
     }
-    console.log("file selected");
-    var file = event.target.files[0];
-    var reader = new FileReader();
-    reader.onloadend = () => {
-      this.setState({
-        selectedFile: [...this.state.selectedFile, file],
-        fileURL: [...this.state.fileURL, reader.result]
-      });
-    };
-    reader.readAsDataURL(file);
-  };
-  onChangeSubmit = () => {
-    const typeOfDamage = this.state.typeOfDamage;
-    for (var i = 0; i < this.state.selectedFile.length; i++) {
-      const fd = new FormData();
-      fd.append(
-        "image",
-        this.state.selectedFile[i],
-        this.state.selectedFile[i].name
-      );
-      console.log("file created");
-      axios
-        .post(
-          "https://us-central1-carmend-52299.cloudfunctions.net/uploadMedia",
-          fd
-        )
-        .then(res => {
-          console.log(res);
-          console.log(res.data.url);
-          this.props.firebase.user(this.props.authUser.uid).update({
-            typeOfDamage,
-            url: res.data.url
-          });
-        })
-        .catch(error => {
-          console.log(error);
+    onChangeFileSelector = (event) => {
+        if (!event.target.files[0]) {
+            return;
+        }
+        console.log("file selected");
+        var file = event.target.files[0];
+        var reader = new FileReader();
+        reader.onloadend = () => {
+            this.setState({
+                selectedFile: [...this.state.selectedFile, file],
+                fileURL: [...this.state.fileURL, reader.result]
+            });
+        };
+        reader.readAsDataURL(file);
+
+
+    }
+    onChangeSubmit = () => {
+        const typeOfDamage = this.state.typeOfDamage;
+        var caseFolderRef = this.props.firebase.user(this.props.authUser.uid).child("cases/");
+        var caseRef = caseFolderRef.push({
+            description: typeOfDamage,
+            status:"created"
+        });
+        for (var i = 0; i < this.state.selectedFile.length; i++) {
+            const fd = new FormData();
+            fd.append('image', this.state.selectedFile[i], this.state.selectedFile[i].name);
+            console.log("file created");
+            axios.post('https://us-central1-carmend-52299.cloudfunctions.net/uploadMedia', fd)
+                .then(res => {
+                    console.log(res);
+                    console.log(res.data.url);
+                    caseRef.child("urls/").push({url: res.data.url});
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }
+
+
+    }
+    //remove order: LIFO
+    onChangeDelete = () => {
+        var selectedFileArray = [...this.state.selectedFile];
+        var fileURLArray = [...this.state.fileURL];
+        selectedFileArray.splice(selectedFileArray.length - 1);
+        fileURLArray.splice(fileURLArray.length - 1);
+        this.setState({
+            selectedFile: [...selectedFileArray],
+            fileURL: [...fileURLArray]
         });
     }
   };
