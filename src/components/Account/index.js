@@ -11,6 +11,7 @@ import { withFirebase } from "../Firebase";
 import { PasswordForgetForm } from "../PasswordForget";
 import PasswordChangeForm from "../PasswordChange";
 
+
 const SIGN_IN_METHODS = [
   {
     id: "password",
@@ -31,10 +32,12 @@ const SIGN_IN_METHODS = [
 ];
 
 const AccountPage = () => (
+  <section class = "main-section"> 
+
   <AuthUserContext.Consumer>
     {authUser => (
       <div>
-        <h1>Account: {authUser.email}</h1>
+        <h1>Welcome, {authUser.email}</h1>
         <PasswordForgetForm />
         <PasswordChangeForm />
         <LoginManagement authUser={authUser} />
@@ -42,6 +45,7 @@ const AccountPage = () => (
       </div>
     )}
   </AuthUserContext.Consumer>
+  </section>
 );
 
 class LoginManagementBase extends Component {

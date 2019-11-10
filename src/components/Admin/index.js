@@ -8,6 +8,7 @@ import * as ROLES from '../../constants/roles';
 import * as ROUTES from '../../constants/routes';
 
 const AdminPage = () => (
+  <section class = "main-section">
   <div>
     <h1>Admin</h1>
     <p>The Admin Page is accessible by every signed in admin user.</p>
@@ -17,6 +18,7 @@ const AdminPage = () => (
       <Route exact path={ROUTES.ADMIN} component={UserList} />
     </Switch>
   </div>
+  </section>
 );
 
 const condition = authUser =>
