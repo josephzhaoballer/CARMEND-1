@@ -53,9 +53,9 @@ class Firebase {
 
   doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
 
-  doSendEmailVerification = () =>
+  doSendEmailVerification = (route) =>
     this.auth.currentUser.sendEmailVerification({
-      url: 'http://localhost:3000/home',
+      url: `http://localhost:3000${route}`,
     });
 
   doPasswordUpdate = password =>
