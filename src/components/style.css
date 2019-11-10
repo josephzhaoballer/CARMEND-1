@@ -1,0 +1,77 @@
+/** color palette
+ DARK BLUE: #00709A
+ MAIN BLUE: #63BFE1
+ DARK GRAY: #47525E
+ MAIN GRAY: #9FAAB0
+LIGHT GRAY: #ECF0F2
+**/
+
+/** basics start **/
+* {
+	margin:0;
+	padding:0;
+	box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-webkit-font-smoothing:antialiased;
+	-moz-font-smoothing:antialiased;
+	-o-font-smoothing:antialiased;
+	font-smoothing:antialiased;
+	text-rendering:optimizeLegibility;
+}
+body {
+    background-color: #ECF0F2!important;
+    margin: 0!important;
+}
+h1, h2, h3, h4, h5, h6 { 
+    font-family: 'Roboto', sans-serif!important;
+    color: #47525E!important;
+}
+p {
+    font-family: 'Roboto', sans-serif!important;
+    color: #9FAAB0!important;
+    letter-spacing: 0.50px!important;
+}
+a {
+    -o-transition: 0.4s ease-in-out;
+	-ms-transition: 0.4s ease-in-out;
+	-moz-transition: 0.4s ease-in-out;
+    transition: 0.4s ease-in-out;
+}
+/** basics end **/
+
+/** navigation start **/
+.navbar {
+    background-color: #63BFE1!important;
+    font-family: 'Roboto', sans-serif;
+    text-transform: uppercase;
+    font-size: 1.25em;
+}
+.navbar-nav {
+    text-align: center;
+}
+nav a {
+    color: white;
+}
+nav a:hover {
+    color: #00709A;
+}
+.custom-toggler.navbar-toggler {
+    border-color: rgb(255,255,255);
+}
+.custom-toggler .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+.form-inline ::placeholder {
+    font-family: 'Roboto', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.75px;
+    color: #9FAAB0!important;
+}
+.form-inline input[type=text] {
+    font-family: 'Roboto', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.75px;
+    color: #47525E;
+}
+/** navigation end **/

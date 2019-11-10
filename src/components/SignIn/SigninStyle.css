@@ -13,10 +13,12 @@
   font-size: 45px;
   transition: all 0.2s;
   -webkit-transition: all 0.2s;
+  background-color: #dbd5bb;
 }
 
 .landing-signin-button:active {
   font-size: 35px;
+  background-color: #dbd5bb;
 }
 
 /******************************************/
@@ -35,6 +37,7 @@
 .signin-logo-att {
   height: 250px;
   width: 450px;
+  color: #ff9d8d;
 }
 
 .signin-h1-position {
@@ -42,7 +45,7 @@
   padding-bottom: 20px;
 }
 .signin-h1-style {
-  color: #ff9d8d;
+  color: #dbd5bb; ;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   font-size: 45px;
   transform: scale(1, 0.95);
@@ -104,6 +107,8 @@
 
 .signin-button-top {
   margin-top: 50px;
+  color: #dbd5bb; ;
+
 }
 
 .button-divider {
@@ -117,12 +122,12 @@
   display: inline-block;
   padding: 0.2em 1em;
   margin-top: -10px;
-  border: 0.1em solid #ff9d8d;
+  border: 0.1em solid #dbd5bb;
   border-radius: 7px;
   font-family: "Roboto", sans-serif;
   font-weight: bold;
   font-size: 25px;
-  color: #ff9d8d;
+  color: #dbd5bb;
   text-align: center;
   transition: all 0.2s;
   cursor: pointer;

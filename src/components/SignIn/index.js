@@ -55,11 +55,8 @@ class SignInFormBase extends Component {
 
     this.props.firebase
       .doSignInWithEmailAndPassword(email, password)
-      .then(authUser => {
-        const role = this.props.firebase.user(authUser.user.uid).get("role");
-        console.log(role);
-        //this.setState({authUser.})
-        //this.setState({ ...INITIAL_STATE });
+      .then(() => {
+        this.setState({ ...INITIAL_STATE });
         this.props.history.push(ROUTES.HOME);
       })
       .catch(error => {
@@ -105,11 +102,11 @@ class SignInFormBase extends Component {
             />
             <div class="signin-button-top">
               <button class="signin-button" disabled={isInvalid} type="submit">
-                Login
+                LOGIN
               </button>
               <span class="button-divider"></span>
               <Link to={ROUTES.SIGN_UP}>
-                <button class="signin-button">Signup</button>
+                <button class="signin-button">SIGN UP</button>
               </Link>
             </div>
 

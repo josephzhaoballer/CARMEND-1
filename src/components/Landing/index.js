@@ -11,7 +11,7 @@ const Landing = () => (
       <div class="landing-logo-position">
         <img src={mainLogo} class="landing-logo-att" />
       </div>
-
+      
       <div class="landing-text">
         PLEASE LOGIN OR SIGNUP TO GET A
         <br />

@@ -4,12 +4,28 @@ import './PasswordForgetStyle.css';
 
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
+import mainLogo from '../../assets/logo.png';
 
 const PasswordForgetPage = () => (
+  <section class = "main-section">
   <div>
-    <h1>PasswordForget</h1>
-    <PasswordForgetForm />
+  <div class = "split-horizontal-border"> </div>
+   
+   <div class = "main-text" >Forgot Your Password?</div>
+   <div class = "split-horizontal-border"> </div>
+    
+   <center><p> No worries. It happens to all of us. </p></center>
+   <center><p> Please enter your email and we'll send you a link to reset your password.</p></center>
+
+   
+
+   <div class="landing-logo-position">
+  <img src = {mainLogo} class="landing-logo-att" />
+
   </div>
+   <center><PasswordForgetForm /></center>
+  </div>
+  </section>
 );
 
 const INITIAL_STATE = {
