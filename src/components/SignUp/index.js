@@ -25,7 +25,9 @@ const INITIAL_STATE = {
   passwordOne: "",
   passwordTwo: "",
   role: "",
-  error: null
+  error: null,
+  latitude: null,
+  longitude: null
 };
 
 const ERROR_CODE_ACCOUNT_EXISTS = "auth/email-already-in-use";
@@ -43,10 +45,29 @@ class SignUpFormBase extends Component {
     super(props);
 
     this.state = { ...INITIAL_STATE };
+    this.getCoordinates = this.getCoordinates.bind(this);
+    this.getLocation = this.getLocation.bind(this);
+    this.getLocation();
+  }
+  
+  getLocation(){
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(this.getCoordinates);
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }
+  }
+  getCoordinates(position){
+    this.setState({
+      latitude:position.coords.latitude,
+      longitude: position.coords.longitude
+    });
+    console.log(this.state.latitude);
+    console.log(this.state.longitude);
   }
 
   onSubmit = event => {
-    const { username, email, passwordOne, role } = this.state;
+    const { username, email, passwordOne, role, latitude,longitude} = this.state;
 
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
@@ -55,7 +76,9 @@ class SignUpFormBase extends Component {
         return this.props.firebase.user(authUser.user.uid).set({
           username,
           email,
-          role
+          role,
+          latitude,
+          longitude
         });
       })
       .then(() => {
