@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { compose } from "recompose";
-import "./SignupStyle.css";
+import "./SignUpStyle.css";
 import mainLogo from "../../assets/logo.png";
 
 import { withFirebase } from "../Firebase";
