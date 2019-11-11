@@ -7,7 +7,11 @@ import { withAuthorization, withEmailVerification } from "../Session";
 import { withFirebase } from "../Firebase";
 class ShopHome extends Component {
   render() {
-    return <h1>shop home</h1>;
+    return (
+      
+      <h1>shop home</h1>
+
+    );
   }
 }
 const condition = authUser => !!authUser;
