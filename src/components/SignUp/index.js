@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { compose } from "recompose";
-import "./SignUpStyle.css";
+import "./SignupStyle.css";
 import mainLogo from "../../assets/logo.png";
 
 import { withFirebase } from "../Firebase";
@@ -40,6 +40,9 @@ const ERROR_MSG_ACCOUNT_EXISTS = `
   on your personal account page.
 `;
 
+const ERROR_ROLE_UNASSIGNED =
+  "Please check if your are a vehicle owner or a body shop owner.";
+
 class SignUpFormBase extends Component {
   constructor(props) {
     super(props);
@@ -49,25 +52,38 @@ class SignUpFormBase extends Component {
     this.getLocation = this.getLocation.bind(this);
     this.getLocation();
   }
-  
-  getLocation(){
+
+  getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(this.getCoordinates);
     } else {
       alert("Geolocation is not supported by this browser.");
     }
   }
-  getCoordinates(position){
+  getCoordinates(position) {
     this.setState({
-      latitude:position.coords.latitude,
+      latitude: position.coords.latitude,
       longitude: position.coords.longitude
     });
     console.log(this.state.latitude);
     console.log(this.state.longitude);
   }
 
+  displayRoleError(role) {
+    if (role === "") {
+      return ERROR_ROLE_UNASSIGNED;
+    }
+  }
+
   onSubmit = event => {
-    const { username, email, passwordOne, role, latitude,longitude} = this.state;
+    const {
+      username,
+      email,
+      passwordOne,
+      role,
+      latitude,
+      longitude
+    } = this.state;
 
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
@@ -84,22 +100,20 @@ class SignUpFormBase extends Component {
       .then(() => {
         console.log(role);
         if (role === ROLES.OWNER) {
-          return this.props.firebase.doSendEmailVerification(ROUTES.OWNER_HOME);// after email verification page will direct to "/home-owner"
+          return this.props.firebase.doSendEmailVerification(ROUTES.OWNER_HOME); // after email verification page will direct to "/home-owner"
         }
         if (role === ROLES.SHOP) {
-          return this.props.firebase.doSendEmailVerification(ROUTES.SHOP_HOME);// after email verification page will direct to "/home-shop"
+          return this.props.firebase.doSendEmailVerification(ROUTES.SHOP_HOME); // after email verification page will direct to "/home-shop"
         }
-
       })
       .then(() => {
         //this.setState({ ...INITIAL_STATE });
         if (role === ROLES.OWNER) {
           this.props.history.push(ROUTES.OWNER_HOME);
-        }
-        else if (role === ROLES.SHOP) {
+        } else if (role === ROLES.SHOP) {
           this.props.history.push(ROUTES.SHOP_HOME);
-        }
-        else {// for now no way to reach here 
+        } else {
+          // for now no way to reach here
           console.log("redirected to /home");
           this.props.history.push(ROUTES.HOME);
         }
@@ -137,7 +151,8 @@ class SignUpFormBase extends Component {
       passwordOne !== passwordTwo ||
       passwordOne === "" ||
       email === "" ||
-      username === "";
+      username === "" ||
+      role === "";
 
     return (
       <div class="overall-text">
@@ -182,7 +197,6 @@ class SignUpFormBase extends Component {
               type="password"
               placeholder="Confirm Password"
             />
-
             {/** <label class="signup-admin-label">
               Admin:
               <input
@@ -218,7 +232,12 @@ class SignUpFormBase extends Component {
               </label>
             </div>
             <div class="signup-button-spacing">
-              <button class="signup-button" disabled={isInvalid} type="submit">
+              <button
+                class="signup-button"
+                disabled={isInvalid}
+                type="submit"
+                onClick={this.displayRoleError(role)}
+              >
                 Sign Up
               </button>
               <p>
@@ -227,7 +246,6 @@ class SignUpFormBase extends Component {
                 </Link>
               </p>
             </div>
-
             {error && <p class="error-size">{error.message}</p>}
           </form>
         </div>
