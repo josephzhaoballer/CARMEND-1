@@ -8,12 +8,28 @@ import {
 import { withFirebase } from "../Firebase";
 
 import ImageUpload from "../ImageUpload/ImageUpload.js";
+import mainLogo from '../../assets/logo.png';
+
 const axios = require("axios");
 
 const OwnerHome = () => (
+	<section class = "main-section">
+  <div class= "split-horizontal-border"> </div>
+  <div class = "main-text" >Home | History</div> 
+  
+  <div class= "split-horizontal"> </div>
+
+  <br></br>
+  <div class= "main-text"><i>Welcome, Car Owner</i></div>
+
+  <div class = "landing-logo-position">
+  <img src = {mainLogo} class="landing-logo-att" /> 
+  </div>
+  
 	<AuthUserContext.Consumer>
 		{authUser => <SubmitNewCase authUser={authUser} />}
 	</AuthUserContext.Consumer>
+	</section>
 );
 class SubmitNewCaseBase extends Component {
 	constructor(props) {
@@ -95,21 +111,20 @@ class SubmitNewCaseBase extends Component {
 		}
 		return (
 			<div>
-				<h1>home of car owner</h1>
 				<div>
-					<h2>Type of Damage:</h2>
+				<br>
+				</br>
+				<div class= "main-text">Type of Damage: 
 					<input
 						name="typeOfDamage"
 						type="text"
 						value={typeOfDamage}
 						onChange={this.onChangeTextBox}
 					></input>
-				</div>
+				</div></div>
 
 				{result}
 				<input type="file" onChange={this.onChangeFileSelector}></input>
-				<button onClick={this.onChangeDelete}>Remove</button>
-
 				<button onClick={this.onChangeSubmit}>Submit</button>
 			</div>
 		);
@@ -123,3 +138,7 @@ export default compose(
 	withEmailVerification,
 	withAuthorization(condition)
 )(OwnerHome);
+  
+
+  
+

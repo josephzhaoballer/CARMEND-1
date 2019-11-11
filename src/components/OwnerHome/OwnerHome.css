@@ -7,7 +7,18 @@
   
   .main-logo-position {
     padding-top: 50px;
+    text-align: right;
+  }
+
+  .landing-logo-position {
+    padding-top: 100px;
     text-align: left;
+  }
+
+  .landing-logo-att {
+    height: 250px;
+    width: 450px;
+    text-align:right;
   }
   
   .main-logo-att {
@@ -21,7 +32,7 @@
     text-align: center;
     font-size: 30px;
   }
-  
+
   .split-border {
     background-color: #ff9d8d;
     text-align: center;
