@@ -25,6 +25,10 @@ const INITIAL_STATE = {
   passwordOne: "",
   passwordTwo: "",
   role: "",
+  shopName:"",
+  shopAddress: "",
+  city: "",
+  state: "",
   error: null,
   latitude: null,
   longitude: null
@@ -55,7 +59,7 @@ class SignUpFormBase extends Component {
 
   getLocation() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(this.getCoordinates);
+      navigator.geolocation.getCurrentPosition(this.getCoordinates, this.handleLocationError);
     } else {
       alert("Geolocation is not supported by this browser.");
     }
@@ -67,6 +71,23 @@ class SignUpFormBase extends Component {
     });
     console.log(this.state.latitude);
     console.log(this.state.longitude);
+  }
+  handleLocationError(error) {
+    switch (error.code) {
+      case error.PERMISSION_DENIED:
+        alert("User denied the request for Geolocation.");
+        break;
+      case error.POSITION_UNAVAILABLE:
+        alert("Location information is unavailable.");
+        break;
+      case error.TIMEOUT:
+        alert("The request to get user location timed out.");
+        break;
+      case error.UNKNOWN_ERROR:
+        alert("An unknown error occurred.");
+        break;
+      default: alert("Unknown error accurred");
+    }
   }
 
   displayRoleError(role) {
@@ -82,20 +103,35 @@ class SignUpFormBase extends Component {
       passwordOne,
       role,
       latitude,
-      longitude
+      longitude,
+      shopName
     } = this.state;
+    var currentUser;
 
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
         // Create a user in your Firebase realtime database
-        return this.props.firebase.user(authUser.user.uid).set({
-          username,
-          email,
-          role,
-          latitude,
-          longitude
-        });
+        currentUser = authUser;
+        if(role === ROLES.SHOP){
+          console.log("inside shop");
+          var address = this.state.shopAddress+", "+this.state.city+", "+this.state.state;
+          return this.props.firebase.user(authUser.user.uid).set({
+            username,
+            email,
+            role,
+            address,
+            shopName
+          });
+        }else{
+          return this.props.firebase.user(authUser.user.uid).set({
+            username,
+            email,
+            role,
+            latitude,
+            longitude
+          });
+        }
       })
       .then(() => {
         console.log(role);
@@ -118,6 +154,26 @@ class SignUpFormBase extends Component {
           this.props.history.push(ROUTES.HOME);
         }
       })
+      .then(()=>{
+        if(role === ROLES.SHOP){
+          var APIAddress = this.state.shopAddress+", "+this.state.city+", "+this.state.state;
+          APIAddress = APIAddress.replace(" ","+");
+          console.log(APIAddress);
+          fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${APIAddress}&key=AIzaSyA2eIKJXi2Gzs4RVVlH2wKAB6h7i51jvRw`)
+          .then(res=>res.json())
+          .then(data=>{
+            var latitude = data.results[0].geometry.location.lat;
+            var longitude = data.results[0].geometry.location.lng;
+            console.log(latitude);
+            console.log(longitude);
+
+            this.props.firebase.user(currentUser.user.uid).update({
+              latitude,
+              longitude
+            });
+          })
+        }
+      })
       .catch(error => {
         if (error.code === ERROR_CODE_ACCOUNT_EXISTS) {
           error.message = ERROR_MSG_ACCOUNT_EXISTS;
@@ -132,6 +188,9 @@ class SignUpFormBase extends Component {
   onChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
+  onChangeAddress = event => {
+    this.setState({ [event.target.name]: event.target.value.toUpperCase() });
+  };
 
   onChangeRadioButton = event => {
     this.setState({ [event.target.name]: event.target.value });
@@ -143,7 +202,11 @@ class SignUpFormBase extends Component {
       email,
       passwordOne,
       passwordTwo,
+      shopAddress,
+      city,
+      state,
       role,
+      shopName,
       error
     } = this.state;
 
@@ -153,6 +216,7 @@ class SignUpFormBase extends Component {
       email === "" ||
       username === "" ||
       role === "";
+
 
     return (
       <div class="overall-text">
@@ -197,16 +261,45 @@ class SignUpFormBase extends Component {
               type="password"
               placeholder="Confirm Password"
             />
-            {/** <label class="signup-admin-label">
-              Admin:
+            
+            {role === ROLES.SHOP ? <div>
+              <h5 class="signup-h5-pass">Shop Name*</h5>
               <input
-                name="isAdmin"
-                type="checkbox"
-                checked={role }
-                onChange={this.onChangeCheckbox}
+                class="signup-textarea"
+                name="shopName"
+                value={shopName}
+                onChange={this.onChange}
+                type="text"
+                placeholder="Joseph's Car Body"
               />
-            </label>
-            <br />*/}
+              <h5 class="signup-h5-pass">Shop Address*</h5>
+              <input
+                class="signup-textarea"
+                name="shopAddress"
+                value={shopAddress}
+                onChange={this.onChangeAddress}
+                type="text"
+                placeholder="123 S 1ST ST"
+              />
+              <h5 class="signup-h5-pass">City*</h5>
+              <input
+                class="signup-textarea"
+                name="city"
+                value={city}
+                onChange={this.onChangeAddress}
+                type="text"
+                placeholder="SAN JOSE"
+              />
+              <h5 class="signup-h5-pass">State*</h5>
+              <input
+                class="signup-textarea"
+                name="state"
+                value={state}
+                onChange={this.onChangeAddress}
+                type="text"
+                placeholder="CA"
+              />
+            </div> : null}
             <div class="signup-checkbox1-label">
               <label>
                 Body Shop
