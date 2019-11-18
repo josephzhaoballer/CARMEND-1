@@ -9,4 +9,8 @@ export const ADMIN_DETAILS = '/admin/:id';
 export const OWNER_HOME = '/home-owner';
 export const SHOP_HOME = '/home-shop';
 export const HISTORY = '/history';
+export const DETAILS = '/details';
+export const QUOTEHISTORY = '/quote-history';
+
+
 

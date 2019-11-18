@@ -12,6 +12,8 @@ import AdminPage from "../Admin";
 import OwnerHome from "../OwnerHome"
 import ShopHome from "../ShopHome"
 import History from "../History"
+import Details from "../Details";
+import QuoteHistory from "../QuoteHistory";
 
 import * as ROUTES from "../../constants/routes";
 import { withAuthentication } from "../Session";
@@ -29,6 +31,8 @@ const App = () => (
       <Route path={ROUTES.OWNER_HOME} component = {OwnerHome}/>
       <Route path={ROUTES.SHOP_HOME} component = {ShopHome}/>
       <Route path={ROUTES.HISTORY} component = {History}/>
+      <Route path={ROUTES.DETAILS} component = {Details}/>
+      <Route path={ROUTES.QUOTEHISTORY} component = {QuoteHistory}/>
     </div>
   </Router>
 );

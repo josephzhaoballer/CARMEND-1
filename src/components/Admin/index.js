@@ -22,7 +22,7 @@ const AdminPage = () => (
 );
 
 const condition = authUser =>
-  authUser && !!authUser.roles[ROLES.ADMIN];
+  authUser && !!authUser.role[ROLES.ADMIN];
 
 export default compose(
   withEmailVerification,

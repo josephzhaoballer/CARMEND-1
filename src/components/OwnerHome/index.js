@@ -104,7 +104,6 @@ class SubmitNewCaseBase extends Component {
 		const typeOfDamage = this.state.typeOfDamage;
 		var result = [];
 		for (var i = 0; i < this.state.fileURL.length; i++) {
-			console.log("here");
 			var url = this.state.fileURL[i];
 			console.log(url);
 			result.push(<img id={i} src={url} width={300} height={500} />);
@@ -125,6 +124,7 @@ class SubmitNewCaseBase extends Component {
 
 				{result}
 				<input type="file" onChange={this.onChangeFileSelector}></input>
+				<button onClick = {this.onChangeDelete}>remove</button>
 				<button onClick={this.onChangeSubmit}>Submit</button>
 			</div>
 		);

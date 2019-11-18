@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import { Link, withRouter } from "react-router-dom";
 import { compose } from "recompose";
+import * as ROUTES from "../../constants/routes";
 import {
 	AuthUserContext,
 	withAuthorization,
@@ -18,87 +20,118 @@ class CaseHistoryBase extends Component {
 		super(props);
 		this.state = {
 			authUser: this.props.authUser,
-			cases:[],
-			typeOfDamage: ""
-        };
-        this.fetchCases = this.fetchCases.bind(this);
-        this.gotCases = this.gotCases.bind(this);
-        this.gotErrors = this.gotErrors.bind(this);
-        this.fetchCases();
+			cases: [],
+		};
+		this.fetchCases = this.fetchCases.bind(this);
+		this.gotCases = this.gotCases.bind(this);
+		this.gotErrors = this.gotErrors.bind(this);
+		this.accept = this.accept.bind(this);
+		this.fetchCases();
 
-    }
-    fetchCases(){
-        console.log(this.props.authUser);
-        var caseFolderRef = this.props.firebase.user(this.props.authUser.uid).child("cases/");
-        caseFolderRef.once("value").then(this.gotCases,this.gotErrors);
+	}
+	fetchCases() {
+		console.log(this.props.authUser);
+		var caseFolderRef = this.props.firebase.user(this.props.authUser.uid).child("cases/");
+		caseFolderRef.once("value").then(this.gotCases, this.gotErrors);
 
-    }
-    gotCases(data){
-        var caseList = [];
-        var cases = data.val();
-        var keysOfCases = Object.keys(cases);
-        for(var i = 0;i<keysOfCases.length;i++){
-            
-            var k = keysOfCases[i];
-            var c = cases[k];
-            var newCase ={
-                description: c.description,
-                status:c.status,
-                urls: []
-            }
-            //console.log(c.description);
-            var keysOfUrls = Object.keys(c.urls);
-            for(var j = 0;j<keysOfUrls.length;j++){
-                var kOfU = keysOfUrls[j];
-                var url = c.urls[kOfU];
-                newCase.urls.push(url.url);
-                //console.log(url.url);
-            }
-            caseList.push(newCase);
-        }
-        this.setState({
-            cases:[...caseList]
-        });
-    }
-    gotErrors(error){
-        console.log("ERROR: ")
-        console.log(error);
-    }
+	}
+	gotCases(data) {
+		var caseList = [];
+		var cases = data.val();
+		//there is no history cases
+		if (!cases) {
+			return;
+		}
+
+		this.setState({
+			cases: cases
+		});
+	}
+	gotErrors(error) {
+		console.log("ERROR: ")
+		console.log(error);
+	}
+	accept(caseK, quoteK, acceptedQuote, acceptedShopName, acceptedAddress,acceptedShopId) {
+		console.log(caseK);
+		console.log(quoteK);
+		var quoteRef = this.props.firebase.user(this.state.authUser.uid).child("cases/").child(caseK).child("quotes").child(quoteK);
+		quoteRef.update({
+			accepted: true
+		});
+		var caseRef = this.props.firebase.user(this.state.authUser.uid).child("cases/").child(caseK);
+		caseRef.update({
+			status: "finished",
+			acceptedQuote: acceptedQuote,
+			acceptedShopName: acceptedShopName,
+			acceptedAddress: acceptedAddress,
+			acceptedShopid:acceptedShopId
+		});
+		window.location.reload();
+	}
 
 	render() {
-        const caseHistory = this.state.cases.map((c)=>{
-            const images = c.urls.map((url)=>{
-                console.log(url);
-                return <img src={url}></img>;
-            })
-            
-            return (
-                <div>
-                <h3>{c.status}</h3>
-                <h3>{c.description}</h3>
-                {images}
-                </div>
-            );
-        });
+		const caseHistory = Object.entries(this.state.cases).map(([caseK, caseV]) => {
+			const images = Object.entries(caseV.urls).map(([urlK, urlV]) => {
+				console.log(urlV);
+				return <img src={urlV.url}></img>;
+			})
+			var quotes;
+			console.log(caseV.quotes);
+			if (caseV.status !== "finished") {
+				if (caseV.quotes) {
+					quotes = Object.entries(caseV.quotes).map(([quoteK, quoteV]) => {
+						return (
+							<div>
+								<h4>{quoteV.shopName}</h4>
+								<h4>{quoteV.shopAddress}</h4>
+								<h4>{quoteV.quote}</h4>
+								<button onClick={() => { this.accept(caseK, quoteK, quoteV.quote, quoteV.shopName, quoteV.shopAddress,quoteV.shopid) }}>accept quote</button>
+							</div>
+						)
+					})
+				}
+				else {
+					quotes = <h4>currently no quotes</h4>;
+				}
+			} else {
+				quotes = <div>
+					<h4>{caseV.acceptedShopName}</h4>
+					<h4>{caseV.acceptedAddress}</h4>
+					<h4>{caseV.acceptedQuote}</h4>
+				</div>;
+			}
+
+
+
+
+			return (
+				<div>
+					<h3>{caseV.status}</h3>
+					<h3>{caseV.description}</h3>
+					{images}
+					{quotes}
+				</div>
+			);
+		});
 		return (
+
 			<div>
 				<h1>CASE HISTORY</h1>
-                <div>
-                    {
-                        
-                    }
-                </div>
-                {caseHistory}
+				{this.state.cases.length == 0 ? <h1>There is no history case to show</h1> : null}
+				<div>
+					{
+
+					}
+				</div>
+				{caseHistory}
 			</div>
 		);
 	}
 }
-const CaseHistory = withFirebase(CaseHistoryBase);
+const CaseHistory = compose(withFirebase,withRouter)(CaseHistoryBase);
 
 const condition = authUser => !!authUser;
-const CaseBlock = () =>{
 
-}
 
 export default compose(
 	withEmailVerification,

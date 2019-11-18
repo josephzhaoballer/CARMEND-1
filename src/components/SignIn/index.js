@@ -7,6 +7,8 @@ import mainLogo from "../../assets/logo.png";
 import { PasswordForgetLink } from "../PasswordForget";
 import { withFirebase } from "../Firebase";
 import * as ROUTES from "../../constants/routes";
+import * as ROLES from "../../constants/roles";
+
 
 const SignInPage = () => (
   <section class="signin-section">
@@ -56,8 +58,16 @@ class SignInFormBase extends Component {
     this.props.firebase
       .doSignInWithEmailAndPassword(email, password)
       .then(() => {
-        this.setState({ ...INITIAL_STATE });
-        this.props.history.push(ROUTES.HOME);
+        this.props.firebase.onAuthUserListener((user)=>{
+          console.log(user.role);
+          if(user.role === ROLES.OWNER){
+            this.props.history.push(ROUTES.OWNER_HOME);
+          }else if(user.role === ROLES.SHOP){
+            this.props.history.push(ROUTES.SHOP_HOME);
+          }
+        })
+        // this.setState({ ...INITIAL_STATE });
+        // this.props.history.push(ROUTES.HOME);
       })
       .catch(error => {
         this.setState({ error });
@@ -65,6 +75,7 @@ class SignInFormBase extends Component {
 
     event.preventDefault();
   };
+  
 
   onChange = event => {
     this.setState({ [event.target.name]: event.target.value });
@@ -133,7 +144,7 @@ class SignInGoogleBase extends Component {
         return this.props.firebase.user(socialAuthUser.user.uid).set({
           username: socialAuthUser.user.displayName,
           email: socialAuthUser.user.email,
-          roles: {}
+          role: {}
         });
       })
       .then(() => {
@@ -183,7 +194,7 @@ class SignInFacebookBase extends Component {
         return this.props.firebase.user(socialAuthUser.user.uid).set({
           username: socialAuthUser.additionalUserInfo.profile.name,
           email: socialAuthUser.additionalUserInfo.profile.email,
-          roles: {}
+          role: {}
         });
       })
       .then(() => {
@@ -233,7 +244,7 @@ class SignInTwitterBase extends Component {
         return this.props.firebase.user(socialAuthUser.user.uid).set({
           username: socialAuthUser.additionalUserInfo.profile.name,
           email: socialAuthUser.additionalUserInfo.profile.email,
-          roles: {}
+          role: {}
         });
       })
       .then(() => {
