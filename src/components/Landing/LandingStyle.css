@@ -23,7 +23,6 @@
   font-size: 30px;
 }
 
-
 .split-border {
   background-color: #ff9d8d;
   text-align: center;
@@ -32,8 +31,7 @@
   height: 2px;
   border-radius: 30px;
 }
-.split-horizontal-border
-{
+.split-horizontal-border {
   display: block;
   background-color: #ff9d8d;
   margin-top: 40px;

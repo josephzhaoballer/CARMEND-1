@@ -45,7 +45,7 @@
   padding-bottom: 20px;
 }
 .signin-h1-style {
-  color: #dbd5bb; ;
+  color: #ff9d8d;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   font-size: 45px;
   transform: scale(1, 0.95);
@@ -107,8 +107,7 @@
 
 .signin-button-top {
   margin-top: 50px;
-  color: #dbd5bb; ;
-
+  color: #dbd5bb;
 }
 
 .button-divider {
@@ -135,7 +134,7 @@
 
 .signin-button:hover {
   color: #000000;
-  background-color: #ff9d8d;
+  background-color: #dbd5bb;
 }
 
 .signin-admin-label {

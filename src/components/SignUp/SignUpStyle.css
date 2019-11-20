@@ -1,4 +1,4 @@
-.-landing-button {
+.signup-landing-button {
   background-color: #dbd5bb;
   font-size: 40px;
   font-weight: 1000;
@@ -9,19 +9,19 @@
   cursor: pointer;
 }
 
-.-landing-button:hover {
+.signup-landing-button:hover {
   font-size: 45px;
   transition: all 0.2s;
   -webkit-transition: all 0.2s;
 }
 
-.-landing-button:active {
+.signup-landing-button:active {
   font-size: 35px;
 }
 
 /********************************************/
 
-.-section {
+.signup-section {
   height: 100vh;
   background: #252629;
   border: 35px solid #ff9d8d;
@@ -33,7 +33,7 @@
   margin-bottom: -15px;
 }
 
-.-logo-att {
+.signup-logo-att {
   height: 250px;
   width: 450px;
 }
@@ -52,11 +52,11 @@
   -webkit-transition: all 0.2s;
 }
 
-.-h1-position {
+.signup-h1-position {
   text-align: center;
   margin-bottom: 50px;
 }
-.-h1-style {
+.signup-h1-style {
   color: #ff9d8d;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   font-size: 45px;
@@ -68,39 +68,39 @@
   padding: 10px;
 }
 
-.-h5-username {
+.signup-h5-username {
   margin-left: -170px;
   font-size: 12pt;
   margin-bottom: 10px;
   color: #dbd5bb;
 }
 
-.-h5-email {
+.signup-h5-email {
   margin-left: -140px;
   font-size: 12pt;
   margin-bottom: 10px;
   color: #dbd5bb;
 }
 
-.-h5-pass {
+.signup-h5-pass {
   margin-left: -175px;
   font-size: 12pt;
   margin-bottom: 10px;
   color: #dbd5bb;
 }
 
-.-h5-confirm {
+.signup-h5-confirm {
   margin-left: -110px;
   font-size: 12pt;
   margin-bottom: 10px;
   color: #dbd5bb;
 }
 
-.-form {
+.signup-form {
   text-align: center;
 }
 
-.-textarea {
+.signup-textarea {
   height: 35px;
   width: 250px;
   background-color: #ff9d8d;
@@ -110,31 +110,31 @@
   font-weight: bold;
 }
 
-.-textarea:hover {
+.signup-textarea:hover {
   transition: 0.5s;
   width: 300px;
 }
 
-.-textarea:focus {
+.signup-textarea:focus {
   outline: 0;
   width: 300px;
 }
 
-.-textarea:focus::-webkit-input-placeholder {
+.signup-textarea:focus::-webkit-input-placeholder {
   color: transparent;
 }
 
-.-textarea::placeholder {
+.signup-textarea::placeholder {
   color: gray;
   font-weight: 500;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.-button-spacing {
+.signup-button-spacing {
   margin-top: 50px;
 }
 
-.-button {
+.signup-button {
   background-color: transparent;
   display: inline-block;
   padding: 0.2em 1em;
@@ -152,17 +152,13 @@
   cursor: pointer;
 }
 
-.-button:hover {
+.signup-button:hover {
   color: #000000;
   background-color: #ff9d8d;
 }
 
-.-button:active {
+.signup-button:active {
   font-size: 20px;
-}
-
-.-admin-label {
-  text-align: center;
 }
 
 .error-size {

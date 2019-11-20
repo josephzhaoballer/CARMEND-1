@@ -1,91 +1,114 @@
-.main-section {
-    height: 100vh;
-    color: white;
-    background: #252629;
-    border: 35px solid #ff9d8d;
-  }
-  
-  .main-logo-position {
-    padding-top: 50px;
-    text-align: right;
-  }
+.owner-section {
+  height: 100vh;
+  color: white;
+  background: #252629;
+  background-size: cover;
+  border: 35px solid #ff9d8d;
+}
 
-  .landing-logo-position {
-    padding-top: 100px;
-    text-align: left;
-  }
+.owner-logo-position {
+  padding-top: 100px;
+  text-align: center;
+}
 
-  .landing-logo-att {
-    height: 250px;
-    width: 450px;
-    text-align:right;
-  }
-  
-  .main-logo-att {
-    height: 250px;
-    width: 450px;
-  }
-  
-  .main-text {
-    color: #dbd5bb;
-    font-weight: bold;
-    text-align: center;
-    font-size: 30px;
-  }
+.owner-logo-att {
+  height: 250px;
+  width: 450px;
+}
 
-  .split-border {
-    background-color: #ff9d8d;
-    text-align: center;
-    margin-top: 40px;
-    width: 400px;
-    height: 2px;
-    border-radius: 30px;
-  }
-  
-  
-  .split-horizontal-border
-  {
-    display: block;
-    background-color: #dbd5bb;
-    margin-top: 40px;
-    margin-bottom: auto;
-    margin-left: auto;
-    margin-right: auto;
-    border-width: 1px;
-    width: 400px;
-    height: 4px;
-  }
-  
-  .split-horizontal
-  {
-    display: block;
-    background-color: #dbd5bb;
-    margin-top: auto;
-    margin-bottom: 0.5em;
-    margin-left: auto;
-    margin-right: auto;
-    border-width: 1px;
-    width: 400px;
-    height: 4px;
-  }
-  
-  .signup-button-pos {
-    text-align: center;
-    padding-top: 80px;
-  }
-  
-  .signin-button-pos {
-    text-align: center;
-    padding-top: 40px;
-  }
-  
-  .signup-button-pos {
-    text-align: center;
-    padding-top: 80px;
-  }
-  
-  .signin-button-pos {
-    text-align: center;
-    padding-top: 40px;
-  }
-  
+.welcome-text {
+  color: #dbd5bb;
+  font-weight: bold;
+  font-style: italic;
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.damage-text {
+  color: #dbd5bb;
+  font-weight: bold;
+  text-align: center;
+  font-size: 30px;
+}
+
+.owner-textarea {
+  height: 35px;
+  width: 250px;
+  background-color: #ff9d8d;
+  border-style: none;
+  border-radius: 6px;
+  padding-left: 10px;
+  margin-left: 20px;
+  font-weight: bold;
+}
+
+.owner-textarea:hover {
+  transition: 0.5s;
+  padding-right: 20px;
+}
+
+.owner-textarea:focus {
+  outline: 0;
+  padding-right: 20px;
+}
+
+.owner-textarea:focus::-webkit-input-placeholder {
+  color: transparent;
+}
+
+.owner-textarea::placeholder {
+  color: gray;
+  font-size: 12pt;
+  font-weight: 400;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.upload-section {
+  text-align: center;
+}
+
+.upload-input {
+  text-align: center;
+  margin-top: 250px;
+}
+
+.upload-section-buttons {
+  margin-top: 30px;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.custom-file-upload,
+.upload-remove,
+.upload-submit {
+  background-color: #dbd5bb;
+  outline: none;
+  font-size: 20px;
+  font-weight: 700;
+  font-family: "Roboto", sans-serif;
+  color: #252629;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 12px 24px;
+  cursor: pointer;
+  margin-right: 15px;
+}
+
+.custom-file-upload:hover,
+.upload-remove:hover,
+.upload-submit:hover {
+  font-size: 22px;
+  transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+}
+
+.image-upload {
+  margin-bottom: -200px;
+  margin-top: 30px;
+  max-width: 10%;
+  height: auto;
+}

@@ -1,0 +1,26 @@
+.signout-button {
+  background-color: transparent;
+  display: inline-block;
+  padding: 0.2em 1em;
+  border: 0.1em solid #ff9d8d;
+  margin-right: 10px;
+  margin-top: 20px;
+  border-radius: 7px;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  font-size: 25px;
+  color: #ff9d8d;
+  text-align: center;
+  transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+  cursor: pointer;
+}
+
+.signout-button:hover {
+  color: #000000;
+  background-color: #ff9d8d;
+}
+
+.signout-button:active {
+  font-size: 20px;
+}

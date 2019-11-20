@@ -25,7 +25,7 @@ const INITIAL_STATE = {
   passwordOne: "",
   passwordTwo: "",
   role: "",
-  shopName:"",
+  shopName: "",
   shopAddress: "",
   city: "",
   state: "",
@@ -59,7 +59,10 @@ class SignUpFormBase extends Component {
 
   getLocation() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(this.getCoordinates, this.handleLocationError);
+      navigator.geolocation.getCurrentPosition(
+        this.getCoordinates,
+        this.handleLocationError
+      );
     } else {
       alert("Geolocation is not supported by this browser.");
     }
@@ -86,7 +89,8 @@ class SignUpFormBase extends Component {
       case error.UNKNOWN_ERROR:
         alert("An unknown error occurred.");
         break;
-      default: alert("Unknown error accurred");
+      default:
+        alert("Unknown error accurred");
     }
   }
 
@@ -113,9 +117,14 @@ class SignUpFormBase extends Component {
       .then(authUser => {
         // Create a user in your Firebase realtime database
         currentUser = authUser;
-        if(role === ROLES.SHOP){
+        if (role === ROLES.SHOP) {
           console.log("inside shop");
-          var address = this.state.shopAddress+", "+this.state.city+", "+this.state.state;
+          var address =
+            this.state.shopAddress +
+            ", " +
+            this.state.city +
+            ", " +
+            this.state.state;
           return this.props.firebase.user(authUser.user.uid).set({
             username,
             email,
@@ -123,7 +132,7 @@ class SignUpFormBase extends Component {
             address,
             shopName
           });
-        }else{
+        } else {
           return this.props.firebase.user(authUser.user.uid).set({
             username,
             email,
@@ -154,24 +163,31 @@ class SignUpFormBase extends Component {
           this.props.history.push(ROUTES.HOME);
         }
       })
-      .then(()=>{
-        if(role === ROLES.SHOP){
-          var APIAddress = this.state.shopAddress+", "+this.state.city+", "+this.state.state;
-          APIAddress = APIAddress.replace(" ","+");
+      .then(() => {
+        if (role === ROLES.SHOP) {
+          var APIAddress =
+            this.state.shopAddress +
+            ", " +
+            this.state.city +
+            ", " +
+            this.state.state;
+          APIAddress = APIAddress.replace(" ", "+");
           console.log(APIAddress);
-          fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${APIAddress}&key=AIzaSyA2eIKJXi2Gzs4RVVlH2wKAB6h7i51jvRw`)
-          .then(res=>res.json())
-          .then(data=>{
-            var latitude = data.results[0].geometry.location.lat;
-            var longitude = data.results[0].geometry.location.lng;
-            console.log(latitude);
-            console.log(longitude);
+          fetch(
+            `https://maps.googleapis.com/maps/api/geocode/json?address=${APIAddress}&key=AIzaSyA2eIKJXi2Gzs4RVVlH2wKAB6h7i51jvRw`
+          )
+            .then(res => res.json())
+            .then(data => {
+              var latitude = data.results[0].geometry.location.lat;
+              var longitude = data.results[0].geometry.location.lng;
+              console.log(latitude);
+              console.log(longitude);
 
-            this.props.firebase.user(currentUser.user.uid).update({
-              latitude,
-              longitude
+              this.props.firebase.user(currentUser.user.uid).update({
+                latitude,
+                longitude
+              });
             });
-          })
         }
       })
       .catch(error => {
@@ -217,7 +233,6 @@ class SignUpFormBase extends Component {
       username === "" ||
       role === "";
 
-
     return (
       <div class="overall-text">
         <div class="signup-h1-position">
@@ -232,7 +247,7 @@ class SignUpFormBase extends Component {
               value={username}
               onChange={this.onChange}
               type="text"
-              placeholder="ie. Jeffrey Nguyen"
+              placeholder="ie. John Smith"
             />
             <h5 class="signup-h5-email">Email Address*</h5>
             <input
@@ -261,45 +276,47 @@ class SignUpFormBase extends Component {
               type="password"
               placeholder="Confirm Password"
             />
-            
-            {role === ROLES.SHOP ? <div>
-              <h5 class="signup-h5-pass">Shop Name*</h5>
-              <input
-                class="signup-textarea"
-                name="shopName"
-                value={shopName}
-                onChange={this.onChange}
-                type="text"
-                placeholder="Joseph's Car Body"
-              />
-              <h5 class="signup-h5-pass">Shop Address*</h5>
-              <input
-                class="signup-textarea"
-                name="shopAddress"
-                value={shopAddress}
-                onChange={this.onChangeAddress}
-                type="text"
-                placeholder="123 S 1ST ST"
-              />
-              <h5 class="signup-h5-pass">City*</h5>
-              <input
-                class="signup-textarea"
-                name="city"
-                value={city}
-                onChange={this.onChangeAddress}
-                type="text"
-                placeholder="SAN JOSE"
-              />
-              <h5 class="signup-h5-pass">State*</h5>
-              <input
-                class="signup-textarea"
-                name="state"
-                value={state}
-                onChange={this.onChangeAddress}
-                type="text"
-                placeholder="CA"
-              />
-            </div> : null}
+
+            {role === ROLES.SHOP ? (
+              <div>
+                <h5 class="signup-h5-pass">Shop Name*</h5>
+                <input
+                  class="signup-textarea"
+                  name="shopName"
+                  value={shopName}
+                  onChange={this.onChange}
+                  type="text"
+                  placeholder="Joseph's Car Body"
+                />
+                <h5 class="signup-h5-pass">Shop Address*</h5>
+                <input
+                  class="signup-textarea"
+                  name="shopAddress"
+                  value={shopAddress}
+                  onChange={this.onChangeAddress}
+                  type="text"
+                  placeholder="123 S 1ST ST"
+                />
+                <h5 class="signup-h5-pass">City*</h5>
+                <input
+                  class="signup-textarea"
+                  name="city"
+                  value={city}
+                  onChange={this.onChangeAddress}
+                  type="text"
+                  placeholder="SAN JOSE"
+                />
+                <h5 class="signup-h5-pass">State*</h5>
+                <input
+                  class="signup-textarea"
+                  name="state"
+                  value={state}
+                  onChange={this.onChangeAddress}
+                  type="text"
+                  placeholder="CA"
+                />
+              </div>
+            ) : null}
             <div class="signup-checkbox1-label">
               <label>
                 Body Shop
@@ -361,10 +378,7 @@ const SignUpButton = () => (
   </div>
 );
 
-const SignUpForm = compose(
-  withRouter,
-  withFirebase
-)(SignUpFormBase);
+const SignUpForm = compose(withRouter, withFirebase)(SignUpFormBase);
 
 export default SignUpPage;
 
