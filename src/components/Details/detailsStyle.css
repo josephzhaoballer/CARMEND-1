@@ -104,3 +104,8 @@
 .submit-button:active {
   font-size: 20px;
 }
+
+.signout-pos {
+  text-align: center;
+  margin-left: 10px;
+}

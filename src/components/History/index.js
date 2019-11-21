@@ -4,6 +4,7 @@ import { compose } from "recompose";
 import * as ROUTES from "../../constants/routes";
 import "./HistoryStyle.css";
 import mainLogo from "../../assets/logo.png";
+import SignOutButton from "../SignOut";
 
 import {
   AuthUserContext,
@@ -13,17 +14,29 @@ import {
 import { withFirebase } from "../Firebase";
 
 const History = () => (
-  <section class = "owner-history-section">
-  <div class="overall-text">
-  <div class="landing-logo-position">
-        <img src={mainLogo} class="landing-logo-att" />
-      </div>
   <AuthUserContext.Consumer>
-    {authUser => <CaseHistory authUser={authUser} />}
+    {authUser => (
+      <section class="owner-history-section stretch">
+        <div class="link-pos">
+          <Link class="link-style" to={ROUTES.OWNER_HOME}>
+            Home |
+          </Link>
+          <Link class="link-style" to={ROUTES.HISTORY}>
+            History
+          </Link>
+        </div>
+        <div class="overall-text">
+          <div class="owner-history-logo-position">
+            <img src={mainLogo} class="owner-history-landing-logo-att" />
+          </div>
+          <CaseHistory authUser={authUser} />{" "}
+          <div class="signout-pos">
+            <SignOutButton />
+          </div>
+        </div>
+      </section>
+    )}
   </AuthUserContext.Consumer>
-  </div>
-  </section>
-
 );
 class CaseHistoryBase extends Component {
   constructor(props) {
@@ -99,7 +112,7 @@ class CaseHistoryBase extends Component {
       ([caseK, caseV]) => {
         const images = Object.entries(caseV.urls).map(([urlK, urlV]) => {
           console.log(urlV);
-          return <img src={urlV.url}></img>;
+          return <img src={urlV.url} class="image-display"></img>;
         });
         var quotes;
         console.log(caseV.quotes);

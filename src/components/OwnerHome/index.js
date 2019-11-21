@@ -9,10 +9,10 @@ import {
 } from "../Session";
 import { withFirebase } from "../Firebase";
 import SignOutButton from "../SignOut";
+import { OwnerHomeHistoryLink } from "../History";
 
 import mainLogo from "../../assets/logo.png";
 import "./OwnerHome.css";
-import { OwnerHomeHistoryLink } from "../History";
 
 const axios = require("axios");
 
@@ -99,7 +99,7 @@ class SubmitNewCaseBase extends Component {
       fileURL: [],
       selectedFile: [],
       typeOfDamage: ""
-    })
+    });
   };
   //remove order: LIFO
   onChangeDelete = () => {

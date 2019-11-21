@@ -8,6 +8,10 @@ import {
 } from "../Session";
 import { withFirebase } from "../Firebase";
 import * as ROUTES from "../../constants/routes";
+
+import { ShopHomeHistoryLink } from "../History";
+import SignOutButton from "../SignOut";
+
 import mainLogo from "../../assets/logo.png";
 import "./detailsStyle.css";
 
@@ -15,11 +19,15 @@ const Details = () => (
   <AuthUserContext.Consumer>
     {authUser => (
       <section class="details-section">
+        <ShopHomeHistoryLink />
         <div class="owner-logo-position">
           <img src={mainLogo} class="owner-logo-att" />
         </div>
         <div>
           <JobForm authUser={authUser} />
+        </div>
+        <div class="signout-pos">
+          <SignOutButton />
         </div>
       </section>
     )}
