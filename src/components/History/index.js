@@ -196,7 +196,7 @@ const ShopHomeHistoryLink = () => (
     <Link class="link-style" to={ROUTES.SHOP_HOME}>
       Home |
     </Link>
-    <Link class="link-style" to={ROUTES.HISTORY}>
+    <Link class="link-style" to={ROUTES.QUOTEHISTORY}>
       History
     </Link>
   </div>
