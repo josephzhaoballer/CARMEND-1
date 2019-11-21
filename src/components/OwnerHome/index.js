@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { compose } from "recompose";
+import { Link, withRouter } from "react-router-dom";
+
 import {
   AuthUserContext,
   withAuthorization,
@@ -92,6 +94,12 @@ class SubmitNewCaseBase extends Component {
           console.log(error);
         });
     }
+    this.setState({
+      authUser: this.props.authUser,
+      fileURL: [],
+      selectedFile: [],
+      typeOfDamage: ""
+    })
   };
   //remove order: LIFO
   onChangeDelete = () => {
@@ -165,7 +173,7 @@ class SubmitNewCaseBase extends Component {
     );
   }
 }
-const SubmitNewCase = withFirebase(SubmitNewCaseBase);
+const SubmitNewCase = compose(withRouter, withFirebase)(SubmitNewCaseBase);
 
 const condition = authUser => !!authUser;
 
