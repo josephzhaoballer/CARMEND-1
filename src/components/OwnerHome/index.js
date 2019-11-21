@@ -95,11 +95,11 @@ class SubmitNewCaseBase extends Component {
         });
     }
     this.setState({
-      authUser: this.props.authUser,
       fileURL: [],
       selectedFile: [],
       typeOfDamage: ""
     });
+    alert("Your case has been submitted.");
   };
   //remove order: LIFO
   onChangeDelete = () => {
