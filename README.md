@@ -1,4 +1,4 @@
-# Create React App [![Build Status]
+# React Installationa and Operation
 
 Create React apps with no build configuration.
 
