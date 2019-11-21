@@ -9,14 +9,14 @@ import * as ROUTES from "../../constants/routes";
 import * as ROLES from "../../constants/roles";
 
 const SignUpPage = () => (
-  <section class="signup-section">
+  <div class="signup-section stretch">
     <div>
       <div class="signup-logo-position">
         <img src={mainLogo} class="signup-logo-att" />
       </div>
       <SignUpForm />
     </div>
-  </section>
+  </div>
 );
 
 const INITIAL_STATE = {

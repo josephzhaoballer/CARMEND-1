@@ -9,10 +9,30 @@ import {
 import { withFirebase } from "../Firebase";
 import * as ROLES from "../../constants/roles";
 
+import mainLogo from "../../assets/logo.png";
+import "./ShopHomeStyle.css";
+import { ShopHomeHistoryLink } from "../History";
+import SignOutButton from "../SignOut";
 
 const ShopHome = () => (
   <AuthUserContext.Consumer>
-    {authUser => <JobList authUser={authUser} />}
+    {authUser => (
+      <section class="shop-section stretch overall-text">
+        <ShopHomeHistoryLink />
+        <div class="shop-logo-position">
+          <img src={mainLogo} class="shop-logo-att" />
+        </div>
+        <div class="welcome-text">
+          <i>Welcome, {authUser.username}</i>
+        </div>
+        <div>
+          <JobList authUser={authUser} />{" "}
+        </div>
+        <div class="signout-pos">
+          <SignOutButton />
+        </div>
+      </section>
+    )}
   </AuthUserContext.Consumer>
 );
 class JobListBase extends Component {
@@ -25,7 +45,7 @@ class JobListBase extends Component {
       latitude: null,
       longitude: null,
       users: [],
-      shopName:""
+      shopName: ""
     };
     this.fetchUsers = this.fetchUsers.bind(this);
     this.gotUsers = this.gotUsers.bind(this);
@@ -39,8 +59,6 @@ class JobListBase extends Component {
     //this.fetchDistance();
     this.fetchLocation();
     this.filterCases();
-
-
   }
   fetchLocation() {
     var userRef = this.props.firebase.user(this.props.authUser.uid);
@@ -52,25 +70,22 @@ class JobListBase extends Component {
       latitude: data.val().latitude,
       shopName: data.val().shopName
     });
-
   }
-  locationError() {
-
-  }
+  locationError() {}
   fetchDistance() {
-    fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=37.2981753,-121.8679479&destinations=37.32017099999999,-121.976599&key=AIzaSyA2eIKJXi2Gzs4RVVlH2wKAB6h7i51jvRw`)
-      .then(data => {
-        console.log(data.json());
-      })
+    fetch(
+      `https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=37.2981753,-121.8679479&destinations=37.32017099999999,-121.976599&key=AIzaSyA2eIKJXi2Gzs4RVVlH2wKAB6h7i51jvRw`
+    ).then(data => {
+      console.log(data.json());
+    });
   }
   fetchUsers() {
     var ref = this.props.firebase.users();
     ref.once("value").then(this.gotUsers, this.userError);
-
   }
   async gotUsers() {
     var ref = this.props.firebase.users();
-    var data = await ref.once("value")
+    var data = await ref.once("value");
 
     console.log(data.val());
     if (!data.val()) {
@@ -80,8 +95,7 @@ class JobListBase extends Component {
     var users = data.val();
     var keysOfUsers = Object.keys(users);
     for (var i = 0; i < keysOfUsers.length; i++) {
-
-      var keyOfUser = keysOfUsers[i];//userid
+      var keyOfUser = keysOfUsers[i]; //userid
       var user = users[keyOfUser];
       if (user.role === ROLES.OWNER) {
         UserList[keyOfUser] = user;
@@ -91,7 +105,7 @@ class JobListBase extends Component {
     return UserList;
   }
   userError(error) {
-    console.log("ERROR: ")
+    console.log("ERROR: ");
     console.log(error);
   }
   async filterUsers() {
@@ -100,19 +114,23 @@ class JobListBase extends Component {
     console.log(unfilteredList);
     for (var key in unfilteredList) {
       var user = unfilteredList[key];
-      await fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${this.state.latitude},${this.state.longitude}&destinations=${user.latitude},${user.longitude}&key=AIzaSyA2eIKJXi2Gzs4RVVlH2wKAB6h7i51jvRw`)
-        .then(response => { return response.json(); }
-        )
-        .then((json) => {
+      await fetch(
+        `https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${this.state.latitude},${this.state.longitude}&destinations=${user.latitude},${user.longitude}&key=AIzaSyA2eIKJXi2Gzs4RVVlH2wKAB6h7i51jvRw`
+      )
+        .then(response => {
+          return response.json();
+        })
+        .then(json => {
           console.log(json.rows[0].elements[0].distance.value);
-          if (json.rows[0].elements[0].distance.value > 16000) {//10 miles
+          if (json.rows[0].elements[0].distance.value > 16000) {
+            //10 miles
             delete unfilteredList[key];
           }
         })
         .catch(error => {
           console.log(error);
-        })
-    };
+        });
+    }
     console.log(unfilteredList);
     return unfilteredList;
   }
@@ -129,9 +147,9 @@ class JobListBase extends Component {
         if (job.status !== "created") {
           delete user.cases[jobKey];
         }
-        if(job.quotes){
-          Object.entries(job.quotes).map(([quoteK,quoteV])=>{
-            if(quoteV.shopid === this.state.authUser.uid){
+        if (job.quotes) {
+          Object.entries(job.quotes).map(([quoteK, quoteV]) => {
+            if (quoteV.shopid === this.state.authUser.uid) {
               delete user.cases[jobKey];
             }
           });
@@ -151,41 +169,58 @@ class JobListBase extends Component {
     console.log(this.state.users);
     var caseHistory;
     if (this.state.users) {
-      caseHistory = Object.entries(this.state.users).filter(([userK,userV])=>{
-        return userV.cases;
-      }).map(([userK, userV]) => {
-         const jobs = Object.entries(userV.cases).map(([caseK, caseV]) => {
-          var urlList = [];
-          const images = Object.entries(caseV.urls).map(([urlK, urlV]) => {
-            urlList.push(urlV);
-            return <img src={urlV.url}></img>;
-          })
+      caseHistory = Object.entries(this.state.users)
+        .filter(([userK, userV]) => {
+          return userV.cases;
+        })
+        .map(([userK, userV]) => {
+          const jobs = Object.entries(userV.cases).map(([caseK, caseV]) => {
+            var urlList = [];
+            const images = Object.entries(caseV.urls).map(([urlK, urlV]) => {
+              urlList.push(urlV);
+              return <img src={urlV.url} class="image-display"></img>;
+            });
 
-          return (
-            <div>
-              <h3>{caseV.description}</h3>
-              {images}
-              <Link to={{ pathname : '/details',state:{uid:userK,cid:caseK,urls:urlList,desc:caseV.description}}}>View Detail</Link>
-            </div>
-          );
+            return (
+              <section class="job-main">
+                <div class="job-style">
+                  <h3>Job Description: {caseV.description}</h3>
+                  {images}
+                  <div>
+                    <Link
+                      class="details-link"
+                      to={{
+                        pathname: "/details",
+                        state: {
+                          uid: userK,
+                          cid: caseK,
+                          urls: urlList,
+                          desc: caseV.description
+                        }
+                      }}
+                    >
+                      View Detail
+                    </Link>
+                  </div>
+                </div>
+              </section>
+            );
+          });
+          return jobs;
         });
-        return jobs;
-
-      });
     } else {
       caseHistory = [];
     }
     console.log(caseHistory);
-    var emptyJobList = <h3>there is no job available</h3>
+    var emptyJobList = <h3 class="h1-style">there is no job available</h3>;
     return (
-      <div>
-        <h1>{this.state.shopName}</h1>
-        <div>
-          {
-
-          }
+      <div class="job-main-pos">
+        <h1 class="h1-style">{this.state.shopName}</h1>
+        <div class="shop-h2-position">
+          <h1 class="shop-h2-style">JOBS</h1>
         </div>
-        {caseHistory.length!==0? caseHistory:emptyJobList}
+        <div>{}</div>
+        {caseHistory.length !== 0 ? caseHistory : emptyJobList}
       </div>
     );
   }
@@ -193,9 +228,7 @@ class JobListBase extends Component {
 const JobList = withFirebase(JobListBase);
 
 const condition = authUser => !!authUser;
-const CaseBlock = () => {
-
-}
+const CaseBlock = () => {};
 
 export default compose(
   withEmailVerification,

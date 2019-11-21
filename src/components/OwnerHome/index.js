@@ -10,6 +10,7 @@ import SignOutButton from "../SignOut";
 
 import mainLogo from "../../assets/logo.png";
 import "./OwnerHome.css";
+import { OwnerHomeHistoryLink } from "../History";
 
 const axios = require("axios");
 
@@ -18,11 +19,12 @@ const OwnerHome = () => (
     <AuthUserContext.Consumer>
       {authUser => (
         <section class="owner-section">
+          <OwnerHomeHistoryLink />
           <div class="owner-logo-position">
             <img src={mainLogo} class="owner-logo-att" />
           </div>
           <div class="welcome-text">
-            <i>Welcome, {authUser.email}</i>
+            <i>Welcome, {authUser.username}</i>
           </div>
           <SubmitNewCase authUser={authUser} />
           <div class="upload-section">
@@ -117,6 +119,7 @@ class SubmitNewCaseBase extends Component {
       console.log(url);
       result.push(<img id={i} src={url} class="image-upload" />);
     }
+    const isInvalid = result.length == 0;
     return (
       <div>
         <div>
@@ -147,9 +150,13 @@ class SubmitNewCaseBase extends Component {
           </div>
           <div class="upload-section-buttons">
             <button class="upload-remove" onClick={this.onChangeDelete}>
-              remove
+              Remove
             </button>
-            <button class="upload-submit" onClick={this.onChangeSubmit}>
+            <button
+              class="upload-submit"
+              disabled={isInvalid}
+              onClick={this.onChangeSubmit}
+            >
               Submit
             </button>
           </div>
