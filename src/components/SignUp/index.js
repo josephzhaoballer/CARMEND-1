@@ -14,8 +14,10 @@ const SignUpPage = () => (
       <div class="signup-logo-position">
         <img src={mainLogo} class="signup-logo-att" />
       </div>
+      <div class="overall-text">
       <SignUpForm />
     </div>
+  </div>
   </div>
 );
 

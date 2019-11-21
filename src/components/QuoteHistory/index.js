@@ -1,19 +1,31 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { compose } from "recompose";
+import * as ROUTES from "../../constants/routes";
+
+
 import {
   AuthUserContext,
   withAuthorization,
   withEmailVerification
 } from "../Session";
 import { withFirebase } from "../Firebase";
+import "./QuoteHistoryStyle.css";
 import * as ROLES from "../../constants/roles";
+import mainLogo from "../../assets/logo.png";
 
 
 const QuoteHistory = () => (
+  <section class = "quote-history-section stretch">
+  <ShopHomeHistoryLink />
+  <div class="quote-history-logo-position">
+        <img src={mainLogo} class="landing-logo-att" />
+        </div>
   <AuthUserContext.Consumer>
     {authUser => <QuotedJobs authUser={authUser} />}
   </AuthUserContext.Consumer>
+  </section>
+ 
 );
 class QuotedJobsBase extends Component {
   constructor(props) {
@@ -184,13 +196,17 @@ class QuotedJobsBase extends Component {
       var lowest = <h3>lowest: {lowestQuote}</h3>;
       var youAreLowest = <h3>Your Quote is the Lowest</h3>;
       return (
+        <section class="job-main">
+       <div class="job-style">
       <div>
         <h2>{job.description}</h2>
         {images}
-        <h3>yourDiagnosis: {yourDiagnosis}</h3>
-        <h3>yourQuote: {yourQuote}</h3>
+        <h3>Your Diagnosis: {yourDiagnosis}</h3>
+        <h3>Your Quote: {yourQuote}</h3>
         {lowestQuote==yourQuote?youAreLowest:lowest}
       </div>
+      </div>
+      </section>
       );
     });
     var Finished = this.state.FinishedJobList.map((job)=>{
@@ -201,12 +217,18 @@ class QuotedJobsBase extends Component {
       var yourQuote = job.acceptedQuote;
       var ownerName = job.ownerName;
       return(
+        <section class="job-main">
+        <div class="job-style">
+       <div>
         <div>
           <h3>Owner's Name: {ownerName}</h3>
           <h3>Description: {description}</h3>
           {images}
           <h3>yourQuote: {yourQuote}</h3>
         </div>
+        </div>
+        </div>
+        </section>
       )
     })
     var rejected = this.state.RejectedJobList.map((job)=>{
@@ -223,6 +245,9 @@ class QuotedJobsBase extends Component {
         }
       });
       return(
+        <section class="job-main">
+        <div class="job-style">
+       <div>
         <div>
           <h3>Description: {description}</h3>
           {images}
@@ -230,6 +255,9 @@ class QuotedJobsBase extends Component {
           <h3>yourQuote: {yourQuote}</h3>
           <h3>Accepted Quote: {job.acceptedQuote}</h3>
         </div>
+        </div>
+        </div>
+        </section>
       );
 
     });
@@ -237,22 +265,54 @@ class QuotedJobsBase extends Component {
     
 
     return (
-      <div>
-        <h1>{this.state.shopName}</h1>
-        <h1>Quote History</h1>
-        <h1>Waiting: </h1>
+  
+    <section class="job-main">
+    
+    <div class="overall-text">
+  
+        <h1 class = "shop-name">{this.state.shopName}</h1>
+        <br></br>
+        <h1 class="quote-h2-style">Quote History</h1>
+        <br></br>
+        <br></br>
+        
+        <h1 class = "shop-name">Waiting </h1>
         {waiting}
-        <h1>Finished: </h1>
+       
+        <div class= "split-horizontal"> </div>
+
+        <h1 class = "shop-name">Finished </h1>
         {Finished}
-        <h1>Rejected: </h1>
+        <div class= "split-horizontal"> </div>
+        <h1 class = "shop-name">Rejected </h1>
+
+
+
         {rejected}
-      </div>
+
+        </div>
+
+        </section>
+      
+    
     );
   }
 }
 const QuotedJobs = withFirebase(QuotedJobsBase);
 
 const condition = authUser => !!authUser;
+const ShopHomeHistoryLink = () => (
+  <div class="link-pos">
+    <Link class="link-style" to={ROUTES.SHOP_HOME}>
+      Home |
+    </Link>
+    <Link class="link-style" to={ROUTES.QUOTEHISTORY}>
+      History
+    </Link>
+  </div>
+);
+
+export {  ShopHomeHistoryLink };
 
 
 export default compose(

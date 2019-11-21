@@ -3,6 +3,8 @@ import { Link, withRouter } from "react-router-dom";
 import { compose } from "recompose";
 import * as ROUTES from "../../constants/routes";
 import "./HistoryStyle.css";
+import mainLogo from "../../assets/logo.png";
+
 import {
   AuthUserContext,
   withAuthorization,
@@ -11,9 +13,17 @@ import {
 import { withFirebase } from "../Firebase";
 
 const History = () => (
+  <section class = "owner-history-section">
+  <div class="overall-text">
+  <div class="landing-logo-position">
+        <img src={mainLogo} class="landing-logo-att" />
+      </div>
   <AuthUserContext.Consumer>
     {authUser => <CaseHistory authUser={authUser} />}
   </AuthUserContext.Consumer>
+  </div>
+  </section>
+
 );
 class CaseHistoryBase extends Component {
   constructor(props) {
