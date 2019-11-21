@@ -1,4 +1,4 @@
-# React Installationa and Operation
+# React Installation and Operation
 
 Create React apps with no build configuration.
 
