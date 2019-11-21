@@ -2,12 +2,21 @@
   height: 100vh;
   color: white;
   background: #252629;
-  background-size: cover;
+  background-size: auto;
   border: 35px solid #ff9d8d;
 }
 
+#background {
+  width: 50%;
+  height: 100%;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  z-index: -1; /* Ensure div tag stays behind content; -999 might work, too. */
+}
+
 .owner-logo-position {
-  padding-top: 100px;
+  padding-top: 20px;
   text-align: center;
 }
 
@@ -81,9 +90,7 @@ input[type="file"] {
   display: none;
 }
 
-.custom-file-upload,
-.upload-remove,
-.upload-submit {
+.custom-file-upload {
   background-color: #dbd5bb;
   outline: none;
   font-size: 20px;
@@ -98,12 +105,34 @@ input[type="file"] {
   margin-right: 15px;
 }
 
-.custom-file-upload:hover,
-.upload-remove:hover,
-.upload-submit:hover {
+.custom-file-upload:hover {
   font-size: 22px;
   transition: all 0.2s;
   -webkit-transition: all 0.2s;
+}
+
+.upload-remove,
+.upload-submit {
+  background-color: transparent;
+  display: inline-block;
+  padding: 0.2em 1em;
+  margin-top: -10px;
+  margin-right: 15px;
+  border: 0.1em solid #dbd5bb;
+  border-radius: 7px;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+  color: #dbd5bb;
+  text-align: center;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.upload-remove:hover,
+.upload-submit:hover {
+  color: #000000;
+  background-color: #dbd5bb;
 }
 
 .image-upload {
