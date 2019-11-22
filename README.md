@@ -128,8 +128,9 @@ Your app is ready to be deployed.
 You can find detailed instructions on using Create React App and many tips in [its documentation](https://facebook.github.io/create-react-app/).
 
 # Firebase Configuration
-1. create a firebase project, enable authentication, realtime database, storage, and cloud function.
-2. push the function in folder /function to firebase cloud function. This cloud function works returns a url for the image once it is uploaded to storage. 
-3. set up google cloud to allow firebase to send request to google cloud(Although they both are google's product, you need to give firebase permission in google cloud).
-4. Bonus: If you want you own google maps api key, you can get it from google maps platform website and replace the key in the code.
+    1. Create a Google Firebase project, enable authentication, realtime database, storage, and cloud function.
+    2. Push the function in folder /function to Firebase cloud function. This cloud function works returns a url for the image once it          is uploaded to storage. 
+    3. Set up Google cloud to allow Firebase to send request to Google cloud. 
+       (Note: Although they both are Google's product, you need to give Firebase permission in Google Cloud).
+    4. Bonus: If you want you own Google Maps API key, you can get it from Google Maps platform website and replace the key in the code.
 
