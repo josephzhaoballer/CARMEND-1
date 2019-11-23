@@ -133,4 +133,22 @@ You can find detailed instructions on using Create React App and many tips in [i
     3. Set up Google cloud to allow Firebase to send request to Google cloud. 
        (Note: Although they both are Google's product, you need to give Firebase permission in Google Cloud).
     4. Bonus: If you want you own Google Maps API key, you can get it from Google Maps platform website and replace the key in the code.
+    
+-----
+
+# Github Link 
+https://github.com/jeffmiguel7/CARMEND/
+
+# Demo Video
+tinyurl.com/carmend-video-demo
+
+# Building Carmend on Mac
+1. Download Carmend zip file from github.
+2. Save zip file on desktop.
+3. Unzip the zip file.
+4. Open a terminal, type the command "cd" and drag the folder to the terminal. 
+    - [![Screen-Shot-2019-11-23-at-12-16-22-AM.png](https://i.postimg.cc/PJb3nk67/Screen-Shot-2019-11-23-at-12-16-22-AM.png)](https://postimg.cc/7J6MSjr1)
+5. Install the node modules by typing the command "npm install."
+6. After installation of the node modules, type the command "npm start."
+7. A new webpage with a local host address will pop up in a browser. 
 
