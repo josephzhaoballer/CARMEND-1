@@ -1,3 +1,6 @@
+# About
+Carmend is a web application built to help customers to find local body shops to fix their cars. It uses Google Maps API to match customers with local car shops with in 10 miles of distance. Car shops who signed up can provide diagnosis and quote for a specific job. Carmend helps car owners to find the best deals without steping out of their house.
+
 # React Installation and Operation
 
 Create React apps with no build configuration.
