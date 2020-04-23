@@ -5,7 +5,7 @@
 Carmend is a web application built to help customers to find local body shops to fix their cars. It uses Google Maps API to match customers with local car shops with in 10 miles of distance. Car shops who signed up can provide diagnosis and quote for a specific job. Carmend helps car owners to find the best deals without steping out of their house.
 
 # Demo Video
-http://tinyurl.com/carmend-video-demo
+https://drive.google.com/file/d/1d_adhsSM6AyhBN_5CTOoCbqKEWxGCu6h/view?usp=sharing
 
 # Try it Yourself
 http://carmend.herokuapp.com
