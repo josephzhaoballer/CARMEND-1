@@ -4,6 +4,12 @@
 </p>
 Carmend is a web application built to help customers to find local body shops to fix their cars. It uses Google Maps API to match customers with local car shops with in 10 miles of distance. Car shops who signed up can provide diagnosis and quote for a specific job. Carmend helps car owners to find the best deals without steping out of their house.
 
+# Demo Video
+http://tinyurl.com/carmend-video-demo
+
+# Try it Yourself
+http://carmend.herokuapp.com
+
 # React Installation and Operation
 
 Create React apps with no build configuration.
@@ -145,8 +151,6 @@ You can find detailed instructions on using Create React App and many tips in [i
 # Github Link 
 https://github.com/josephzhaoballer/CARMEND-1
 
-# Demo Video
-tinyurl.com/carmend-video-demo
 
 # Building Carmend on Mac
 1. Download Carmend zip file from github.
