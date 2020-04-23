@@ -137,7 +137,7 @@ You can find detailed instructions on using Create React App and many tips in [i
 -----
 
 # Github Link 
-https://github.com/jeffmiguel7/CARMEND/
+https://github.com/josephzhaoballer/CARMEND-1
 
 # Demo Video
 tinyurl.com/carmend-video-demo
